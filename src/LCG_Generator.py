@@ -3,7 +3,7 @@ def lcg(modulus: int, a: int, c: int, seed: int):
         seed = (a * seed + c) % modulus
         yield seed
 
-VALUE = lcg(2**128, 6364136223846793005, 1442695040888963407, 0)
+VALUE = lcg(2**64, 6364136223846793005, 1442695040888963407, 0)
 
 def random_1(value):
     value = next(VALUE)
