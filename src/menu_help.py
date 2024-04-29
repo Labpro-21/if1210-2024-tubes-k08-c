@@ -10,7 +10,6 @@ Kamu belum login sebagai role apapun. Silahkan login terlebih dahulu.
 Footnote: 
 Untuk menggunakan aplikasi, silahkan masukkan nama fungsi yang terdaftar
 Jangan lupa untuk memasukkan input yang valid
-
 """)
         input_help = input()
         # fungsi selanjutnya
@@ -27,8 +26,7 @@ Halo Agent Purry. Kamu memanggil command HELP. Kamu memilih jalan yang benar, se
 
 Footnote: 
 Untuk menggunakan aplikasi, silahkan masukkan nama fungsi yang terdaftar
-Jangan lupa untuk memasukkan input yang valid
-        
+Jangan lupa untuk memasukkan input yang valid    
 """)
         input_help = input()
         # fungsi selanjutnya
@@ -49,3 +47,5 @@ Jangan lupa untuk memasukkan input yang valid
 """)
         input_help = input()
         # fungsi selanjutnya
+
+help("agent")
