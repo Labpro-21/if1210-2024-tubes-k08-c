@@ -1,7 +1,6 @@
 def help(status):
     if status == "non-agent":
-        print("""
-=========== HELP ===========
+        print("""=========== HELP ===========
 Kamu belum login sebagai role apapun. Silahkan login terlebih dahulu.
 
 1. Login
@@ -15,8 +14,7 @@ Jangan lupa untuk memasukkan input yang valid
         # fungsi selanjutnya
     
     elif status == "agent":
-        print("""
-=========== HELP ===========
+        print("""=========== HELP ===========
 
 Halo Agent Purry. Kamu memanggil command HELP. Kamu memilih jalan yang benar, semoga kamu tidak sesat kemudian. Berikut adalah hal-hal yang dapat kamu lakukan sekarang:
 
@@ -32,8 +30,7 @@ Jangan lupa untuk memasukkan input yang valid
         # fungsi selanjutnya
     
     elif status == "admin":
-        print("""
-=========== HELP ===========
+        print("""=========== HELP ===========
 
 Selamat datang, Admin. Berikut adalah hal-hal yang dapat kamu lakukan:
 
@@ -47,5 +44,3 @@ Jangan lupa untuk memasukkan input yang valid
 """)
         input_help = input()
         # fungsi selanjutnya
-
-help("agent")
