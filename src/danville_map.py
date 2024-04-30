@@ -14,41 +14,37 @@ y = 1
 
 move = ""
 
-def down(y,x,map):
-    update = y
+def down(new_coordinate,map):
     if map[y+1][x] == " ":
         map[y][x],map[y+1][x] = map[y+1][x],map[y][x]
-        update += 1
+        new_coordinate += 1
     else:
         print("unable to move because of an obstacle")
-    return update
+    return new_coordinate
 
-def up(y,x,map):
-    update = y
+def up(new_coordinate,map):
     if map[y-1][x] == " ":
         map[y][x],map[y-1][x] = map[y-1][x],map[y][x]
-        update -= 1
+        new_coordinate -= 1
     else:
         print("unable to move because of an obstacle")
-    return update
+    return new_coordinate
 
-def right(y,x,map):
-    update = x
+def right(new_coordinate,map):
     if map[y][x+1] == " ":
         map[y][x],map[y][x+1] = map[y][x+1],map[y][x]
-        update += 1
+        new_coordinate += 1
     else:
         print("unable to move because of an obstacle")
-    return update
+    return new_coordinate
 
-def left(y,x,map):
-    update = x
+def left(new_coordinate,map):
     if map[y][x-1] == " ":
         map[y][x],map[y][x-1] = map[y][x-1],map[y][x]
-        update -= 1
+        new_coordinate -= 1
     else:
         print("unable to move because of an obstacle")
-    return update
+    return new_coordinate
 
 while True:
     for i in range(10):
@@ -57,13 +53,13 @@ while True:
         print()
     move = input("")
     if move == "d": 
-        x = right(y,x,map)
+        x = right(x,map)
     elif move == "a": 
-        x =left(y,x,map)
+        x =left(x,map)
     elif move == "w": 
-        y = up(y,x,map)
+        y = up(y,map)
     elif move == "s":
-        y = down(y,x,map)
+        y = down(y,map)
     # elif move == "battle":
     #     if map[x][y+1] == "X" or map[x][y-1] == "X" or map[x+1][y] == "X" or map[x-1][y] == "X":
     #         battle()
