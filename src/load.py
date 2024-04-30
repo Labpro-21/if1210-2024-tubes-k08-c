@@ -1,0 +1,94 @@
+import argparse
+import os
+
+
+def csv_to_dict(file_name: str):
+    # add a row
+    rows = []
+    with open(file_name, 'r') as file:
+        lines = []
+        line = ''
+        while True:
+            # reads the file one-by-one
+            char = file.read(1)
+            # breaks when it reaches the end
+            if not char:
+                break
+            # add a line if line end is reached
+            if char == '\n':
+                lines.append(line)
+                line = ''
+            # add char to line
+            else:
+                line += char
+
+        # get headers for dict
+        headers = []
+        header = ''
+        for char in lines[0]:
+            # adds a header if ";" is reached and prepares for a new one
+            if char == ';':
+                headers.append(header)
+                header = ''
+            # add chars to header
+            else:
+                header += char
+        # loop lines ignoring the first line
+        for line in lines[1:]:
+            fields = []
+            field = ''
+            # appends field when ";" is reached
+            for char in line:
+                if char == ';':
+                    fields.append(field)
+                    field = ''
+                else:
+                    field += char
+            # append rows of dicts
+            row_dict = {}
+            for i in range(len(headers)):
+                row_dict[headers[i]] = fields[i]
+            rows.append(row_dict)
+    return rows
+
+
+def load_files():
+    # gets current file parent
+    parent_path = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "data")
+    # argparser setup
+    load_parser = argparse.ArgumentParser(description="Save file loader")
+    load_parser.add_argument("folder_path", help="Input the save file folder path", type=str)
+    load_args = load_parser.parse_args()
+    # target path
+    target_path = os.path.join(parent_path, load_args.folder_path)
+    # folder name not given
+    if load_args.folder_path == "":
+        print("No folder name was given, exiting program")
+        exit()
+    # folder found
+    if os.path.isdir(target_path):
+        print("Initializing......")
+        # get files paths
+        users_path = os.path.join(target_path, "user.csv")
+        monster_data_path = os.path.join(target_path, "monster.csv")
+        inv_item_path = os.path.join(target_path, "item_inventory.csv")
+        inv_monster_path = os.path.join(target_path, "monster_inventory.csv")
+        shop_item_path = os.path.join(target_path, "item_shop.csv")
+        shop_monster_path = os.path.join(target_path, "monster_shop.csv")
+
+        # load to each list of dictionaries
+        users_data = csv_to_dict(users_path)
+        monster_data = csv_to_dict(monster_data_path)
+        inv_item_data = csv_to_dict(inv_item_path)
+        inv_monster_data = csv_to_dict(inv_monster_path)
+        shop_item_data = csv_to_dict(shop_item_path)
+        shop_monster_data = csv_to_dict(shop_monster_path)
+        print()
+        print("Program Loaded")
+        print("Welcome to OWCA Agent")
+        return users_data, monster_data, inv_item_data, inv_monster_data, shop_item_data, shop_monster_data
+    # folder not found
+    else:
+        print("Folder \"{}\" was not found, exiting program".format(load_args.folder_path))
+        exit()
+
