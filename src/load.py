@@ -12,13 +12,13 @@ def csv_to_dict(file_name: str):
             # reads the file one-by-one
             char = file.read(1)
             # breaks when it reaches the end
-            if not char:
+            if char == '':
+                lines.append(line)
                 break
             # add a line if line end is reached
             if char == '\n':
                 lines.append(line)
                 line = ''
-
             # add char to line
             else:
                 line += char
@@ -38,7 +38,6 @@ def csv_to_dict(file_name: str):
                 if index == len(lines[0])-1:
                     headers.append(header)
             index += 1
-
         # loop lines ignoring the first line
         for line in lines[1:]:
             fields = []
@@ -46,7 +45,7 @@ def csv_to_dict(file_name: str):
             index = 0
             # appends field when ";" is reached
             for char in line:
-                if char == ';' :
+                if char == ';':
                     fields.append(field)
                     field = ''
                 else:
@@ -55,6 +54,7 @@ def csv_to_dict(file_name: str):
                         fields.append(field)
                 index += 1
             # append rows of dicts
+
             row_dict = {}
             for i in range(len(headers)):
                 row_dict[headers[i]] = fields[i]
