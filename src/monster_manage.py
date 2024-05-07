@@ -26,13 +26,6 @@ def csv_append(df_path,id,type_name,atk_power,def_power,hp):
     csv_file.writelines(f"\n{id};{type_name};{atk_power};{def_power};{hp}")
     csv_file.close()
 
-def validasi_int(angka):
-    try:
-        int(angka)
-        return True
-    except:
-        return False
-
 def ui_monster():
     min_def,max_def = 0,50
     while True:
@@ -56,13 +49,13 @@ def ui_monster():
                     print("Nama sudah terdaftar, coba lagi!\n")
             while True:
                 atk_power = input("Masukkan ATK Power : ")
-                if validasi_int(atk_power):
+                if atk_power.isdigit():
                     break
                 else:
                     print("Masukkan input berupa Integer, coba lagi!\n")
             while True:
                 def_power = input("Masukkan DEF Power : ")
-                if validasi_int(def_power):
+                if def_power.isdigit():
                     if min_def <= int(def_power) <= max_def:
                         break
                     else:
@@ -71,7 +64,7 @@ def ui_monster():
                     print("Masukkan input berupa Integer, coba lagi!\n")
             while True:
                 hp = input("Masukkan HP : ")
-                if validasi_int(hp):
+                if hp.isdigit():
                     break
                 else:
                     print("Masukkan input berupa Integer, coba lagi!\n")
