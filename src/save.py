@@ -1,9 +1,12 @@
 import os
 
 
-def csv_saver(folder_path: str, data_array: list[dict[str, str]], file_name:str):
+# csv writer function
+def csv_saver(folder_path: str, data_array: list[dict[str, str]], file_name: str):
     save_file_path = os.path.join(folder_path, file_name)
+    # opens file
     with open(save_file_path, 'w') as file:
+        # writes the headers first
         data_array_headers = list(data_array[0].keys())
         for header_index in range(len(data_array_headers)):
             file.write(data_array_headers[header_index])
@@ -11,6 +14,7 @@ def csv_saver(folder_path: str, data_array: list[dict[str, str]], file_name:str)
                 file.write(";")
             else:
                 file.write("\n")
+        # writes the values per row
         for row in data_array:
             curr_row_values = list(row.values())
             for value_index in range(len(curr_row_values)):
@@ -21,21 +25,25 @@ def csv_saver(folder_path: str, data_array: list[dict[str, str]], file_name:str)
                     file.write("\n")
 
 
+# save mechanism function
 def save(user_data: list[dict[str, str]],
          monster_data: list[dict[str, str]],
          inv_item_data: list[dict[str, str]],
          inv_monster_data: list[dict[str, str]],
          shop_item_data: list[dict[str, str]],
          shop_monster_data: list[dict[str, str]]):
-    parent_path = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))),"data")
+    # path designation
+    parent_path = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "data")
     target_folder = input("Enter save folder name : ")
     save_path = os.path.join(parent_path, target_folder)
     print("Saving, do not exit program")
     if os.path.isdir(save_path):
         pass
+    # creates new folder if specified folder does not exist
     else:
         os.makedirs(save_path)
         print("Creating folder at data/{}".format(target_folder))
+    # saves all the data
     csv_saver(save_path, user_data, "user.csv")
     csv_saver(save_path, monster_data, "monster.csv")
     csv_saver(save_path, inv_item_data, "item_inventory.csv")
