@@ -13,7 +13,8 @@ def csv_to_dict(file_name: str):
             char = file.read(1)
             # breaks when it reaches the end
             if char == '':
-                lines.append(line)
+                if line != "":
+                    lines.append(line)
                 break
             # add a line if line end is reached
             if char == '\n':
