@@ -164,3 +164,5 @@ cython_debug/
 .idea/misc.xml
 .idea/inspectionProfiles/profiles_settings.xml
 .idea/if1210-2024-tubes-k08-c.iml
+data/init/load test.py
+data/init/test_extract_csv.py
