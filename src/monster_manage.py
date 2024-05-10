@@ -1,8 +1,6 @@
 import load
 import os
 
-df_path = os.path.join("data/","init/","monster.csv")
-
 def tabel_monster(df):
     list_len = [[2],[4],[9],[9],[2]]
     max_len = []
@@ -27,6 +25,7 @@ def csv_append(df_path,id,type_name,atk_power,def_power,hp):
     csv_file.close()
 
 def ui_monster():
+    df_path = os.path.join("data/","init/","monster.csv")
     min_def,max_def = 0,50
     while True:
         df = load.csv_to_dict(df_path)

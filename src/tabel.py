@@ -7,7 +7,7 @@ dict_1 = [{'id': '1', 'type': 'Pikachow', 'atk_power': '125', 'def_power': '10',
           {'id': '5', 'type': 'Chacha', 'atk_power': '80', 'def_power': '30', 'hp': '7006'}] # Sebagai Contoh
 
 def tabel(df,row_1): # df merupakan list-nya dan row_1 merupakan list index-nya
-    list_key = list(dict_1[0].keys())
+    list_key = list(df[0].keys())
     list_len = [[len(i)] for i in list_key]
     max_len = []
     for i in range(len(df)):
@@ -33,4 +33,24 @@ def tabel(df,row_1): # df merupakan list-nya dan row_1 merupakan list index-nya
             print(f"{df[i][list_key[j]]}{" "*(max_len[j] - list_len[j][i+1])} ",end=ending2)
     print("\n")
 
-tabel(dict_1,['ID','Type','ATK Power','DEF Power','HP']) # Sebagai contoh
+def dict_to_csv(file,dict):
+    string_text = ""
+    list_key = list(dict[0].keys())
+    for i in range(len(list_key)):
+        string_text += f"{list_key[i]};" if i != len(list_key)-1 else f"{list_key[i]}\n"
+    for i in range(len(dict)):
+        for j in range(len(list_key)):
+            if (j != len(list_key)-1):
+                string_text += f"{dict[i][list_key[j]]};"
+            elif (i != len(dict)-1):
+                string_text += f"{dict[i][list_key[j]]}\n"
+            else:
+                string_text += f"{dict[i][list_key[j]]}"
+
+    write_file = open(file,"w")
+    write_file.write(string_text)
+    write_file.close()
+
+dict_to_csv("data/init/monster.csv",dict_1)
+
+# tabel(dict_1,['ID','Type','ATK Power','DEF Power','HP']) # Sebagai contoh
