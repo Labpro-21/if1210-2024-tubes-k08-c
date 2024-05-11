@@ -112,7 +112,7 @@ Level     : {list_monster_user[pilihan-1]['level']}""")
             if skill_monster_enemy[2] <= 0:
                 skill_monster_enemy[2] = 0
             
-            print(f"""\n{monster_n(pilihan-1)['type']},  menyerang {type_monster['type']} !!!
+            print(f"""\n{monster_n(pilihan-1)['type']}, menyerang {type_monster['type']} !!!
 
 Name      : {type_monster['type']}
 ATK Power : {skill_monster_enemy[0]}
@@ -124,7 +124,7 @@ Level     : {level_monster}
             if skill_monster_enemy[2] <= 0:
                 print(f"Selamat, Anda berhasil mengalahkan monster {type_monster['type']} !!!")
                 add_oc_coin = lcg.randint1(5*level_monster,30*level_monster)
-                user["oc"] = str(int(user["oc"])+add_oc_coin)
+                user[int(id)-1]["oc"] = str(int(user[int(id)-1]["oc"])+add_oc_coin)
                 print(f"Total OC yang diperoleh: {add_oc_coin}")
                 break
             else:
@@ -174,4 +174,4 @@ Level     : {list_monster_user[pilihan-1]['level']}""")
             break
 
 # print(load.csv_to_dict(os.path.join("data/","init/","user.csv")))
-battle('2',user,item_inventory,monster_inventory,monster_dict)
+battle('3',user,item_inventory,monster_inventory,monster_dict)
