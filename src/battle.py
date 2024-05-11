@@ -4,6 +4,11 @@ import os
 import monster
 import tabel
 
+# Parameter user untuk file user.csv
+# Parameter monster_player untuk file monster_inventory.csv
+# Parameter monster_dict untuk file monster.csv
+# Parameter id merupakan id dari pemain
+
 def user_id_monster(monster_player,id): # fungsi untuk mengambil monster bergantung pada user_id
     list_monster = []
     for i in monster_player:
@@ -12,9 +17,8 @@ def user_id_monster(monster_player,id): # fungsi untuk mengambil monster bergant
 
     return list_monster
 
-def add_oc(id,add):
+def add_oc(id,add,user): # fungsi untuk menambah oc dan disimpan pada user.csv
     file_path = os.path.join("data/","init/","user.csv")
-    user = load.csv_to_dict(file_path)
     for i in user:
         if i['id'] == str(id):
             i['oc'] = str(int(i['oc']) + add)
@@ -22,23 +26,19 @@ def add_oc(id,add):
     
     tabel.dict_to_csv(file_path,user)
 
-def name_user(id):
-    file_path = os.path.join("data/","init/","user.csv")
-    user = load.csv_to_dict(file_path)
+def name_user(id,user): # fungsi untuk menentukan nama dari id yang diberikan
     for i in user:
         if i['id'] == str(id):
             return i['username']
 
-def battle(id):
-    monster_player = load.csv_to_dict(os.path.join("data/","init/","monster_inventory.csv"))
-    monster_dict = load.csv_to_dict(os.path.join("data/","init/","monster.csv"))
+def battle(id,monster_player,monster_dict): # fungsi utama
     random_num = lcg.randint1(0,len(monster_dict)-1)
     type_monster = monster_dict[random_num]
     level_monster = lcg.randint1(1,5)
     skill_monster_enemy = monster.atribut(type_monster,level_monster)
     list_monster_user = user_id_monster(monster_player,id)
 
-    def monster_n(n):
+    def monster_n(n): # fungsi untuk listing monster sesuai dengan yang dimiliki player
         return monster_dict[int(list_monster_user[n]["monster_id"])-1]
     
     print(f"""           
