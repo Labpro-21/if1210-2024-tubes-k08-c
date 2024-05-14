@@ -59,13 +59,17 @@ def ui_main_inventory(user_id:int,oc:int,item:list[dict],monster:list[dict]):
     print(f"""
 ============ INVENTORY LIST (User ID: {user_id}) ============
 Jumlah O.W.C.A. Coin-mu sekarang {oc}.""")
-    number = 0
-    for i in range(len(monster)):
-        number +=1
-        print(f"{number}. Monster       (Name: {monster[i]['type']}, Lvl: {monster[i]['level']}, HP: {monster[i]['hp']})")
-    for i in range(len(item)):
-        number +=1
-        print(f"{number}. Potion        (Type: {item[i]['type']}, Qty: {item[i]["quantity"]})")
+    if len(item)+len(monster) > 0:
+        number = 0
+        for i in range(len(monster)):
+            number +=1
+            print(f"{number}. Monster       (Name: {monster[i]['type']}, Lvl: {monster[i]['level']}, HP: {monster[i]['hp']})")
+        for i in range(len(item)):
+            number +=1
+            print(f"{number}. Potion        (Type: {item[i]['type']}, Qty: {item[i]["quantity"]})")
+    else:
+        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        print("Tidak ada barang di Inventory kamu. (┬┬﹏┬┬)")
     print()
 
 def ui_monster_inventory(monster:dict):
@@ -107,4 +111,4 @@ def inventory (user_id:int,user:list[dict],item_inventory:list[dict],monster_inv
         print()
     return {'oc': user_oc, 'potion':user_item,'monster': user_monster}    
 
-print(inventory(5,user_data,inv_item_data,inv_monster_data,monster_data))
+print(inventory(3,user_data,inv_item_data,inv_monster_data,monster_data))
