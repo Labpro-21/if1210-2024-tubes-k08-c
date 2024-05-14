@@ -52,6 +52,7 @@ def gacha(user_id: int,
                     print("うわぁぁぁぁぁぁぁ、特別報酬が当たったんだね!!!")
                     print("「3000 OC」を受け取った!!")
                     user_coin += 3000
+                    print(f"Your Current balance is {user_coin} OC")
                     return user_coin, inv_monster_data
                 # normal gacha rewards
                 else:
@@ -80,17 +81,17 @@ def gacha(user_id: int,
                         return user_coin, inv_monster_data
                     # not three of a kind
                     else:
-                        user_coin += total_gains
-                        if user_coin < 0:
-                            user_coin = 0
-                        else:
-                            pass
-                        if total_gains < 0:
-                            print(f"Oops, you lost {total_gains * -1} OC. Better luck next time")
-                        else:
-                            print(f"Congrats, you gained {total_gains} OC. Come again !!!")
-                        print(f"Your current balance is {user_coin}")
-                        return user_coin, inv_monster_data
+                        pass
+                    user_coin += total_gains
+                    if user_coin < 0:
+                        user_coin = 0
+                    else:
+                        pass
+                    if total_gains < 0:
+                        print(f"Oops, you lost {total_gains * -1} OC. Better luck next time")
+                    else:
+                        print(f"Congrats, you gained {total_gains} OC. Come again !!!")
+                    print(f"Your current balance is {user_coin} OC")
         elif play_choice == "N" or play_choice == "n":
             print("See you next time")
             break
