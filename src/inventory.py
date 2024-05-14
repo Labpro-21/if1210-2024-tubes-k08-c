@@ -43,15 +43,12 @@ def monster_inv (user_id : int, monster_inventory: list[dict], monster: list[dic
         if user_id == int(monster_inventory[i]['user_id']):
             monster_id.append(int(monster_inventory[i]['monster_id']))
             monster_level.append(int(monster_inventory[i]['level']))
-    print(monster_id)
-    print(monster_level)
     if len(monster_id)>0:
         inv_monster = []
         for i in range(len(monster_id)):
             for j in range(len(monster)):
                 if monster_id[i] == int(monster[j]['id']):
                     inv_monster.append(ext_dict(monster[j],['type','atk_power','def_power','hp']))
-        print(inv_monster)
         for i in range(len(monster_level)):
             inv_monster[i]['level'] = monster_level[i]
     else:
