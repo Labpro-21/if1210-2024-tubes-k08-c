@@ -1,7 +1,3 @@
-import src.load as load
-
-users_data, monster_data, inv_item_data, inv_monster_data, shop_item_data, shop_monster_data = load.load_files()
-
 def is_valid_username(username): # check the validity of characters in username
     validif = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_-"
     for char in username:
@@ -39,6 +35,8 @@ if is_new_user(username): # username entered is a new user
     if not is_valid_username(username): # invalid characters used in username
         print("Username must only contain letters, numbers, underscores, and dashes.")
     else: # username is valid
+        user = {'id': len(users_data), 'username': username, 'password': password, 'role': 'agent', 'oc': 0}
+        users_data.append(user)
         choose_monster(username)
 else: # username has been taken
     print(f"Username {username} has already been taken.")
