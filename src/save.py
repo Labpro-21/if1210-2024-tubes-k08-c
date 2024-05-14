@@ -18,7 +18,7 @@ def csv_saver(folder_path: str, data_array: list[dict], file_name: str):
         for row in data_array:
             curr_row_values = list(row.values())
             for value_index in range(len(curr_row_values)):
-                file.write(curr_row_values[value_index])
+                file.write(str(curr_row_values[value_index]))
                 if value_index != len(curr_row_values) - 1:
                     file.write(";")
                 else:
