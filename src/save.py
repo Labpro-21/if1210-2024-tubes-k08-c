@@ -2,7 +2,7 @@ import os
 
 
 # csv writer function
-def csv_saver(folder_path: str, data_array: list[dict[str, str]], file_name: str):
+def csv_saver(folder_path: str, data_array: list[dict], file_name: str):
     save_file_path = os.path.join(folder_path, file_name)
     # opens file
     with open(save_file_path, 'w') as file:
@@ -26,14 +26,15 @@ def csv_saver(folder_path: str, data_array: list[dict[str, str]], file_name: str
 
 
 # save mechanism function
-def save(user_data: list[dict[str, str]],
-         monster_data: list[dict[str, str]],
-         inv_item_data: list[dict[str, str]],
-         inv_monster_data: list[dict[str, str]],
-         shop_item_data: list[dict[str, str]],
-         shop_monster_data: list[dict[str, str]]):
+def save(user_data: list[dict],
+         monster_data: list[dict],
+         inv_item_data: list[dict],
+         inv_monster_data: list[dict],
+         shop_item_data: list[dict],
+         shop_monster_data: list[dict]):
     # path designation
-    parent_path = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "data")
+    parent_path = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))),
+                               "data")
     target_folder = input("Enter save folder name : ")
     save_path = os.path.join(parent_path, target_folder)
     print("Saving, do not exit program")

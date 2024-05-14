@@ -2,7 +2,7 @@ import argparse
 import os
 
 
-def csv_to_dict(file_name: str):
+def csv_to_dict(file_name: str) -> list[dict]:
     # add a row
     rows = []
     with open(file_name, 'r') as file:
@@ -36,7 +36,7 @@ def csv_to_dict(file_name: str):
             # add chars to header
             else:
                 header += char
-                if index == len(lines[0])-1:
+                if index == len(lines[0]) - 1:
                     headers.append(header)
             index += 1
         # loop lines ignoring the first line
@@ -62,16 +62,23 @@ def csv_to_dict(file_name: str):
             rows.append(row_dict)
     return rows
 
-def convert_realvalues_dict(arrKeyInt: list[str],arrDict: list[dict]): 
+
+def convert_realvalues_dict(arr_key_int: list[str], arr_dict: list[dict]) -> list[dict]:
     # arrKeyInt -> list of string key dari data Integer
     # arrDict -> List Of Dictionary
-    arrdictCopy = arrDict[:]
-    for i in range(len(arrDict)):
-        for j in range(len(arrKeyInt)):
-            arrdictCopy[i][arrKeyInt[j]] = int(arrdictCopy[i][arrKeyInt[j]])
-    return arrdictCopy
+    arrdictcopy = arr_dict[:]
+    for i in range(len(arr_dict)):
+        for j in range(len(arr_key_int)):
+            arrdictcopy[i][arr_key_int[j]] = int(arrdictcopy[i][arr_key_int[j]])
+    return arrdictcopy
 
-def load_files():
+
+def load_files() -> (list[dict],
+                     list[dict],
+                     list[dict],
+                     list[dict],
+                     list[dict],
+                     list[dict]):
     # gets current file parent
     parent_path = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "data")
     # argparser setup
@@ -96,12 +103,12 @@ def load_files():
         shop_monster_path = os.path.join(target_path, "monster_shop.csv")
 
         # load to each list of dictionaries
-        users_data = convert_realvalues_dict(['id','oc'],csv_to_dict(users_path))
-        monster_data = convert_realvalues_dict(['id','atk_power','def_power','hp'],csv_to_dict(monster_data_path))
-        inv_item_data = convert_realvalues_dict(['user_id','quantity'],csv_to_dict(inv_item_path))
-        inv_monster_data = convert_realvalues_dict(['user_id','monster_id','level'],csv_to_dict(inv_monster_path))
-        shop_item_data = convert_realvalues_dict(['stock','price'],csv_to_dict(shop_item_path))
-        shop_monster_data = convert_realvalues_dict(['monster_id','stock','price'],csv_to_dict(shop_monster_path))
+        users_data = convert_realvalues_dict(['id', 'oc'], csv_to_dict(users_path))
+        monster_data = convert_realvalues_dict(['id', 'atk_power', 'def_power', 'hp'], csv_to_dict(monster_data_path))
+        inv_item_data = convert_realvalues_dict(['user_id', 'quantity'], csv_to_dict(inv_item_path))
+        inv_monster_data = convert_realvalues_dict(['user_id', 'monster_id', 'level'], csv_to_dict(inv_monster_path))
+        shop_item_data = convert_realvalues_dict(['stock', 'price'], csv_to_dict(shop_item_path))
+        shop_monster_data = convert_realvalues_dict(['monster_id', 'stock', 'price'], csv_to_dict(shop_monster_path))
         print()
         print("Program Loaded")
         print("Welcome to OWCA Agent")

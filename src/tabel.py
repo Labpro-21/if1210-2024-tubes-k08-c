@@ -30,7 +30,7 @@ def tabel(df,row_1): # df merupakan list-nya dan row_1 merupakan list index-nya
                 ending2 = '| '
             else:
                 ending2 = '\n'
-            print(f"{df[i][list_key[j]]}{" "*(max_len[j] - list_len[j][i+1])} ",end=ending2)
+            print(f"{df[i][list_key[j]]}{'' *(max_len[j] - list_len[j][i+1])} ",end=ending2)
     print("\n")
 
 def dict_to_csv(file,dict):
