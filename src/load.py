@@ -62,6 +62,14 @@ def csv_to_dict(file_name: str):
             rows.append(row_dict)
     return rows
 
+def convert_realvalues_dict(arrKeyInt: list[str],arrDict: list[dict]): 
+    # arrKeyInt -> list of string key dari data Integer
+    # arrDict -> List Of Dictionary
+    arrdictCopy = arrDict[:]
+    for i in range(len(arrDict)):
+        for j in range(len(arrKeyInt)):
+            arrdictCopy[i][arrKeyInt[j]] = int(arrdictCopy[i][arrKeyInt[j]])
+    return arrdictCopy
 
 def load_files():
     # gets current file parent
@@ -88,12 +96,12 @@ def load_files():
         shop_monster_path = os.path.join(target_path, "monster_shop.csv")
 
         # load to each list of dictionaries
-        users_data = csv_to_dict(users_path)
-        monster_data = csv_to_dict(monster_data_path)
-        inv_item_data = csv_to_dict(inv_item_path)
-        inv_monster_data = csv_to_dict(inv_monster_path)
-        shop_item_data = csv_to_dict(shop_item_path)
-        shop_monster_data = csv_to_dict(shop_monster_path)
+        users_data = convert_realvalues_dict(['id','oc'],csv_to_dict(users_path))
+        monster_data = convert_realvalues_dict(['id','atk_power','def_power','hp'],csv_to_dict(monster_data_path))
+        inv_item_data = convert_realvalues_dict(['user_id','quantity'],csv_to_dict(inv_item_path))
+        inv_monster_data = convert_realvalues_dict(['user_id','monster_id','level'],csv_to_dict(inv_monster_path))
+        shop_item_data = convert_realvalues_dict(['stock','price'],csv_to_dict(shop_item_path))
+        shop_monster_data = convert_realvalues_dict(['monster_id','stock','price'],csv_to_dict(shop_monster_path))
         print()
         print("Program Loaded")
         print("Welcome to OWCA Agent")
@@ -102,4 +110,3 @@ def load_files():
     else:
         print("Folder \"{}\" was not found, exiting program".format(load_args.folder_path))
         exit()
-
