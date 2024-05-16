@@ -49,7 +49,7 @@ def register_ui(user_data: list[dict], monster_data: list[dict], inv_monster_dat
             else:  # username has been taken
                 print(f"Username {username} has already been taken.")
                 while True:
-                    login_move = input("Do you want to login instead? Y/N : ")
+                    login_move = input("Do you want to login instead? Y/N : ").upper()
                     if login_move == "Y":
                         return -999, False, inv_monster_data
                     elif login_move == "N":

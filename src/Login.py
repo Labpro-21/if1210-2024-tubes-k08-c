@@ -40,7 +40,7 @@ def login(list_user: list[dict]):
         else:
             print("Username is not registered!")
             while True:
-                register_move = input("Do you want to register instead? Y/N : ")
+                register_move = input("Do you want to register instead? Y/N : ").upper()
                 if register_move == "Y":
                     return -999, False
                 elif register_move == "N":
