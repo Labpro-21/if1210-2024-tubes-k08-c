@@ -31,8 +31,8 @@ def gacha(user_id: int,
     print("Get three of a kind and receive a monster!!!")
     print("There may even be a hidden reward >< !!!")
     while True:
-        play_choice = input("Would you like to play (Y/N)? : ")
-        if play_choice == "Y" or play_choice == "y":
+        play_choice = input("Would you like to play (Y/N)? : ").upper()
+        if play_choice == "Y":
             if user_coin < 250:
                 print("Sorry you don't have enough OWCA Coins")
                 print("Come back next time !!!")
@@ -91,11 +91,11 @@ def gacha(user_id: int,
                     print(f"Congrats, you gained {total_gains} OC. Come again !!!")
                 print(f"Your current balance is {user_coin} OC")
                 user_data[user_id-1]['oc'] = user_coin
-                return user_data, inv_monster_data
-        elif play_choice == "N" or play_choice == "n":
+
+        elif play_choice == "N":
             print("See you next time")
-            return user_data, inv_monster_data
             break
         else:
             print("Enter a valid choice")
             print()
+    return user_data, inv_monster_data
