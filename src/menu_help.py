@@ -6,7 +6,7 @@ Hello Agent {username}. Since you requested HELP, here are your available action
 
 1. LOGOUT: Log out from your account
 2. SHOP: Visit the Shop to purchase items or monsters
-3. MONSTER: View your OWCA-Dex to see owned monsters
+3. INVENTORY: View items and use your OWCA-Dex to see owned monsters
 4. LAB: Upgrade the monsters you own
 5. BATTLE: Engage in battle with enemies
 6. ARENA: Fight hordes of monsters in the Arena
