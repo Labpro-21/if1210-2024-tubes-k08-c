@@ -30,7 +30,7 @@ def login(list_user: list[dict]):
     Welcome back, Agent {user}!
     Enter “HELP” command to show all available actions.""")
                 user_id = list_user[index]['id']
-                return user_id, True
+                return user, user_id, True
             # wrong password
             else:
                 print("Wrong password!")
@@ -41,7 +41,7 @@ def login(list_user: list[dict]):
             while True:
                 register_move = input("Do you want to register instead? Y/N : ").upper()
                 if register_move == "Y":
-                    return -999, False
+                    return "invalid_user", -999, False
                 elif register_move == "N":
                     break
                 else:

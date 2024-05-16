@@ -47,13 +47,13 @@ def register_ui(user_data: list[dict], monster_data: list[dict], inv_monster_dat
                 new_user = {'id': user_id, 'username': username, 'password': password, 'role': 'agent', 'oc': 0}
                 user_data.append(new_user)
                 new_inv_monster = choose_monster(user_id, username, monster_data, inv_monster_data)
-                return user_id, True, new_inv_monster
+                return username, user_id, True, new_inv_monster
             else:  # username has been taken
                 print(f"Username {username} has already been taken.")
                 while True:
                     login_move = input("Do you want to login instead? Y/N : ").upper()
                     if login_move == "Y":
-                        return -999, False, inv_monster_data
+                        return "invalid_user", -999, False, inv_monster_data
                     elif login_move == "N":
                         break
                     else:
