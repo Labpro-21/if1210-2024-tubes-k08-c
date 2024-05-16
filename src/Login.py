@@ -26,9 +26,7 @@ def login(list_user: list[dict]):
 
         if user_exists:
             if list_user[index]['password'] == pw:
-                print(f"""
-    Welcome back, Agent {user}!
-    Enter “HELP” command to show all available actions.""")
+                print(f"Welcome back, Agent {user}!")
                 user_id = list_user[index]['id']
                 return user, user_id, True
             # wrong password
