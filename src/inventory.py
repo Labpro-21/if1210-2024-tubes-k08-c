@@ -111,4 +111,4 @@ def inventory (user_id:int,user:list[dict],item_inventory:list[dict],monster_inv
         print()
     return {'oc': user_oc, 'potion':user_item,'monster': user_monster}    
 
-print(inventory(3,user_data,inv_item_data,inv_monster_data,monster_data))
+# print(inventory(3,user_data,inv_item_data,inv_monster_data,monster_data))

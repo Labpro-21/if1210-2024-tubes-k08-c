@@ -6,9 +6,10 @@ import ascii_art as art
 
 def gacha(user_id: int,
           user_coin: int,
+          user_data: list[dict],
           monster_data: list[dict],
           inv_monster_data: list[dict]) \
-          -> (int, list[dict]):
+          -> (list[dict], list[dict]):
     terminal_width = os.get_terminal_size().columns
     print("$" * terminal_width)
     print("$" * ((terminal_width - 30) // 2)
@@ -51,9 +52,9 @@ def gacha(user_id: int,
                     art.ryou_jackpot()
                     print("うわぁぁぁぁぁぁぁ、特別報酬が当たったんだね!!!")
                     print("「3000 OC」を受け取った!!")
+                    total_gains = 3000
                     user_coin += 3000
-                    print(f"Your Current balance is {user_coin} OC")
-                    return user_coin, inv_monster_data
+
                 # normal gacha rewards
                 else:
                     total_gains = 0
@@ -78,22 +79,22 @@ def gacha(user_id: int,
                         inv_monster_data.append({'user_id': user_id,
                                                  "monster_id": type_monster,
                                                  "level": level_monster})
-                        return user_coin, inv_monster_data
-                    # not three of a kind
-                    else:
-                        pass
-                    user_coin += total_gains
-                    if user_coin < 0:
-                        user_coin = 0
-                    else:
-                        pass
-                    if total_gains < 0:
-                        print(f"Oops, you lost {total_gains * -1} OC. Better luck next time")
-                    else:
-                        print(f"Congrats, you gained {total_gains} OC. Come again !!!")
-                    print(f"Your current balance is {user_coin} OC")
+
+                user_coin += total_gains
+                if user_coin < 0:
+                    user_coin = 0
+                else:
+                    pass
+                if total_gains < 0:
+                    print(f"Oops, you lost {total_gains * -1} OC. Better luck next time")
+                else:
+                    print(f"Congrats, you gained {total_gains} OC. Come again !!!")
+                print(f"Your current balance is {user_coin} OC")
+                user_data[user_id-1]['oc'] = user_coin
+                return user_data, inv_monster_data
         elif play_choice == "N" or play_choice == "n":
             print("See you next time")
+            return user_data, inv_monster_data
             break
         else:
             print("Enter a valid choice")
