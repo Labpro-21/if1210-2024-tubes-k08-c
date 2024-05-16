@@ -12,9 +12,9 @@ def exit_kill(user_data: list[dict],
         if save_choice == "Y":
             save.save(user_data, monster_data, inv_item_data, inv_monster_data, shop_item_data, shop_monster_data)
             print("See you next time agent !!!")
-            break
+            exit()
         elif save_choice == "N":
             print("See you next time agent !!!")
-            break
+            exit()
         else:
             print("Enter a valid choice")
