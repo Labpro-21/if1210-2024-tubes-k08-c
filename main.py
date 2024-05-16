@@ -13,7 +13,10 @@ import src.register as register
 import src.login as login
 import src.exit_kill as exit_kill
 
+# data loading
 user_data, monster_data, inv_item_data, inv_monster_data, shop_item_data, shop_monster_data = load.load_files()
+
+# login phase
 print("Before entering system, please Login/Register")
 logged_in = False
 while not logged_in:
@@ -24,6 +27,8 @@ while not logged_in:
         logged_id, logged_in, inv_monster_data = register.register_ui(user_data, monster_data, inv_monster_data)
     else:
         print("choose a valid option")
+
+# main game phase
 while True:
     choice = input("next action (SAVE/GACHA/EXIT) testing : ").upper()
     if choice == "SAVE":

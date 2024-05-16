@@ -21,9 +21,7 @@ def login(list_user: list[dict]):
         print("Login into the system !!!")
         user = input("Username: ")
         pw = input("Password: ")
-
-        user_id = -9999
-        is_login = False
+        # check if username exists
         user_exists, index = is_find(user, list_user, 'username')
 
         if user_exists:
@@ -32,13 +30,14 @@ def login(list_user: list[dict]):
     Welcome back, Agent {user}!
     Enter “HELP” command to show all available actions.""")
                 user_id = list_user[index]['id']
-                is_login = True
-                return user_id, is_login
+                return user_id, True
+            # wrong password
             else:
                 print("Wrong password!")
-
+        # user doesn't exist
         else:
             print("Username is not registered!")
+            # prompt to retry/exit
             while True:
                 register_move = input("Do you want to register instead? Y/N : ").upper()
                 if register_move == "Y":
@@ -47,9 +46,3 @@ def login(list_user: list[dict]):
                     break
                 else:
                     print("Enter a valid option")
-
-
-# TESTING
-# arr= [{'id': '1', 'username': 'Mr_Monogram', 'password': 'monogrammer77', 'role': 'admin'}, {'id': '2', 'username': 'Asep_Spakbor', 'password': 'asepwow123', 'role': 'agent'}, {'id': '3', 'username': 'Agen_P', 'password': 'platypus123', 'role': 'agent'}, {'id': '4', 'username': 'B4ngk1dd0ssss', 'password': 'bangkitganteng', 'role': 'agent'}, {'id': '5', 'username': 'Kenny_agen_rahasia', 'password': 'kribogeming55', 'role': 'agent'}]
-
-# print(login(arr))
