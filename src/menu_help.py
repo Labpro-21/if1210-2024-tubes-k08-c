@@ -1,4 +1,4 @@
-def help_ui(status: str, username:str):
+def help_ui(status: str, username: str):
     if status == "agent":
         print(f"""=========== HELP ===========
 
@@ -26,5 +26,3 @@ Welcome back, Admin. Since you requested HELP, here are your available actions:
 4. SAVE: Save current progress and data
 5. EXIT: Exit the game
 """)
-
-
