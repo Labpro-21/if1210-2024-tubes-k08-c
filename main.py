@@ -12,29 +12,64 @@ import src.jackpot as gacha
 import src.register as register
 import src.login as login
 import src.exit_kill as exit_kill
+import src.menu_help as menu
+import src.logout as logout
+# import src.shop as shop
+import src.inventory as inv
 
 # data loading
+
 user_data, monster_data, inv_item_data, inv_monster_data, shop_item_data, shop_monster_data = load.load_files()
 
+
 # login phase
-print("Before entering system, please Login/Register")
+print("Before entering system, please Login/Register/Exit")
 logged_in = False
+logged_id = -999
+logged_username = ""
 while not logged_in:
-    login_choice = input("LOGIN / REGISTER : ").upper()
+    login_choice = input("LOGIN / REGISTER / EXIT: ").upper()
     if login_choice == "LOGIN":
-        logged_id, logged_in = login.login(user_data)
+        logged_username, logged_id, logged_in, = login.login(user_data)
     elif login_choice == "REGISTER":
-        logged_id, logged_in, inv_monster_data = register.register_ui(user_data, monster_data, inv_monster_data)
+        logged_username, logged_id, logged_in, inv_monster_data \
+            = register.register_ui(user_data, monster_data, inv_monster_data)
+    elif login_choice == "EXIT":
+        exit_kill.exit_kill(user_data, monster_data, inv_item_data, inv_monster_data, shop_item_data, shop_monster_data)
+        game_running = False
     else:
         print("choose a valid option")
-
+logged_status = user_data[logged_id-1]['role']
 # main game phase
-while True:
-    choice = input("next action (SAVE/GACHA/EXIT) testing : ").upper()
-    if choice == "SAVE":
-        save.save(user_data, monster_data, inv_item_data, inv_monster_data, shop_item_data, shop_monster_data)
-    elif choice == "GACHA":
-        gacha.gacha(1, 250, monster_data, inv_monster_data)
-    elif choice == "EXIT":
-        exit_kill.exit_kill(user_data, monster_data, inv_item_data, inv_monster_data, shop_item_data, shop_monster_data)
+while logged_in:
+    # coin refresher
+    logged_coin = user_data[logged_id - 1]['oc']
+    print("Use the command 'HELP' to see available actions")
+    game_choice = input("").upper()
+    if game_choice == "HELP":
+        menu.help_ui(logged_status, logged_username)
+    elif game_choice == "LOGOUT":
+        logout.logout()
         break
+    elif game_choice == "SHOP":
+        if logged_status == "agent":
+            pass
+            # shop.shop()
+        elif logged_status == "admin":
+            pass  # shop_management
+    elif game_choice == "INVENTORY":
+        inv.inventory(logged_id, user_data, inv_item_data, inv_monster_data, monster_data)
+    elif game_choice == "LAB":
+        pass  # lab
+    elif game_choice == "BATTLE":
+        pass  # battle
+    elif game_choice == "ARENA":
+        pass  # arena
+    elif game_choice == "GACHA":
+        user_data, inv_monster_data = gacha.gacha(logged_id, logged_coin, user_data, monster_data, inv_monster_data)
+    elif game_choice == "SAVE":
+        save.save(user_data, monster_data, inv_item_data, inv_monster_data, shop_item_data, shop_monster_data)
+    elif game_choice == "EXIT":
+        exit_kill.exit_kill(user_data, monster_data, inv_item_data, inv_monster_data, shop_item_data, shop_monster_data)
+    else:
+        print("Enter a valid command")
