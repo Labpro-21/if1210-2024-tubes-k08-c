@@ -1,10 +1,3 @@
-import src.load as load
-import src.save as save
-import src.tabel as tabulasi
-
-# data loading
-user_data, monster_data, inv_item_data, inv_monster_data, shop_item_data, shop_monster_data = load.load_files()
-
 # fungsi untuk mengecek keberadaan suatu elemen dalam list of dictionaries
 def exist(list_of_dict,n,category):
     for i in range(len(list_of_dict)):
@@ -44,11 +37,21 @@ def view():
 def add():
     choice = str(input("MONSTER / ITEM "))
     if choice.lower() == "monster":
-        show_monster = []
-        for i in range(len(shop_monster_data)):
-            if shop_monster_data[i]["stock"] == 0:
-                show_monster.append(shop_monster_data[i])
-                # belom selesai 
+        # tunjukkin tabelnya
+        monsterid = int(input("Enter Monster ID: "))
+        initialstock = input("Enter initial stock: ")
+        price = input("Enter price: ")
+        shop_monster_data[monsterid-1]["stock"] = initialstock
+        shop_monster_data[monsterid-1]["price"] = price
+        print(f"{monster_data[monsterid-1]["type"]} has been added to shop!")
+    elif choice.lower() == "item":
+        # tunjukkin tabelnya
+        itemid = int(input("Enter Item (1 for Strength, 2 for Resilience, 3 for Healing): "))
+        initialstock = input("Enter initial stock: ")
+        price = input("Enter price: ")
+        shop_item_data[itemid-1]["stock"] = initialstock
+        shop_item_data[itemid-1]["price"] = price
+        print(f"{shop_item_data[item-1]["type"]} has been added to shop!")
 
 # edit option
 def edit():
@@ -103,20 +106,21 @@ def delete():
             print(f"{shop_item_data[itemid-1]['type']} has been deleted from the shop!")
 
 # MAIN PROGRAM
-print(">>> SHOP")
-print("Ah.. it's good to see you again. Welcome!")
+def shop_management():
+    print(">>> SHOP")
+    print("Ah.. it's good to see you again. Welcome!")
 
-option = str(input("OPTIONS: VIEW / ADD / EDIT / DELETE / EXIT "))
-# assume the user's input is always valid
-while option.lower() != 'exit':
-    if option.lower() == 'view':
-        view()
-    elif option.lower() == 'add':
-        add()
-    elif option.lower() == 'edit':
-        edit()
-    elif option.lower() == 'delete':
-        delete()
     option = str(input("OPTIONS: VIEW / ADD / EDIT / DELETE / EXIT "))
-if option.lower() == 'exit': 
-    print("Alrighty, safe travels! Hope to see you again~")
+    # assume the user's input is always valid
+    while option.lower() != 'exit':
+        if option.lower() == 'view':
+            view()
+        elif option.lower() == 'add':
+            add()
+        elif option.lower() == 'edit':
+            edit()
+        elif option.lower() == 'delete':
+            delete()
+        option = str(input("OPTIONS: VIEW / ADD / EDIT / DELETE / EXIT "))
+    if option.lower() == 'exit': 
+        print("Alrighty, safe travels! Hope to see you again~")
