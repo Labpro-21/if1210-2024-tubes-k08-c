@@ -16,11 +16,11 @@ import src.menu_help as menu
 import src.logout as logout
 # import src.shop as shop
 import src.inventory as inv
+import src.battle as bat
 
 # data loading
 
 user_data, monster_data, inv_item_data, inv_monster_data, shop_item_data, shop_monster_data = load.load_files()
-
 
 # login phase
 print("Before entering system, please Login/Register/Exit")
@@ -62,7 +62,7 @@ while logged_in:
     elif game_choice == "LAB":
         pass  # lab
     elif game_choice == "BATTLE":
-        pass  # battle
+        bat.battle(logged_id, user_data, inv_item_data, inv_monster_data, monster_data)
     elif game_choice == "ARENA":
         pass  # arena
     elif game_choice == "GACHA":

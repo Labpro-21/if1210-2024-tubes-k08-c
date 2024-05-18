@@ -1,14 +1,4 @@
-import load
-import tabel
-import os
-
-csv = [{'user_id': '2', 'type': 'strength', 'quantity': '5'},
-       {'user_id': '2', 'type': 'resilience', 'quantity': '3'},
-       {'user_id': '3', 'type': 'resilience', 'quantity': '7'},
-       {'user_id': '4', 'type': 'healing', 'quantity': '3'},
-       {'user_id': '5', 'type': 'strength', 'quantity': '20'}]
-
-def user_id_potion(potion_inventory,id): # fungsi untuk mengambil potion bergantung pada user_id
+def user_id_potion(potion_inventory: list[dict[int,str,str]], id: int) -> list: # fungsi untuk mengambil potion bergantung pada user_id
     list_potion = []
     for i in potion_inventory:
         if i["user_id"] == id:
@@ -16,7 +6,7 @@ def user_id_potion(potion_inventory,id): # fungsi untuk mengambil potion bergant
 
     return list_potion
 
-def up_ability(monster_status,base_hp,max_hp,up):
+def up_ability(monster_status: list, base_hp: int, max_hp: int, up: int) -> None:
     if up == 1:
         monster_status[0] = (monster_status[0]*105)//100
     elif up == 2:
@@ -26,21 +16,14 @@ def up_ability(monster_status,base_hp,max_hp,up):
         if monster_status[2] >= max_hp:
             monster_status[2] = max_hp
 
-def potion_in_dict(user_potion):
-    list_potion = []
-    for i in user_potion:
-        list_potion.append(i['type'])
-
-    return list_potion
-
-def find_index(csv,user_id,type):
+def find_index(potion_inventory: list[dict[int,str,str]], user_id: int, type_up: str) -> int:
     index = 0
-    for i in csv:
-        if i['user_id'] == str(user_id) and i['type'] == type:
+    for i in potion_inventory:
+        if i['user_id'] == user_id and i['type'] == type_up:
             return index
         index += 1
 
-def ui_potion(potion_inventory,monster_name,monster_status,base_hp,max_hp,id,num_potion):
+def ui_potion(potion_inventory: list[dict[int,str,str]], monster_name: str, monster_status: list, base_hp: int, max_hp: int, id: int, num_potion: list) -> None:
     while True:
         user_potion = user_id_potion(potion_inventory,id)
         dict_potion = {'strength' : 0,
@@ -57,43 +40,43 @@ def ui_potion(potion_inventory,monster_name,monster_status,base_hp,max_hp,id,num
 3. Healing Potion (Qty: {dict_potion['healing']}) - Restores Health
 4. Cancel
 """)
-        pilihan_3 = input("Pilih perintah: ")
+        pilihan_3 = input("Select a command: ")
         if pilihan_3 == '1':
             if dict_potion['strength'] == 0:
-                print("Wah, kamu sedang tidak memiliki ramuan ini, silahkan pilih ramuan lain!")
+                print("Wah, you don't have this potion, please choose another potion!")
             elif num_potion[0] >= 1:
-                print(f"Kamu mencoba memberikan ramuan ini kepada {monster_name}, namun dia menolaknya seolah-olah dia memahami ramuan tersebut sudah tidak bermanfaat lagi.")
+                print(f"You try to give this potion to {monster_name}, but the monster refuses it as if monster understands the potion is no longer useful.")
             else:
                 num_potion[0] += 1
                 up_ability(monster_status,base_hp,max_hp,int(pilihan_3))
-                potion_inventory[find_index(potion_inventory,id,'strength')]['quantity'] = str(int(potion_inventory[find_index(potion_inventory,str(id),'strength')]['quantity']) - 1)
-                print(f"Setelah meminum ramuan ini, aura kekuatan terlihat mengelilingi {monster_name} dan gerakannya menjadi lebih cepat dan mematikan.")
+                potion_inventory[find_index(potion_inventory,id,'strength')]['quantity'] = str(int(potion_inventory[find_index(potion_inventory,id,'strength')]['quantity']) - 1)
+                print(f"After drinking this potion, an aura of power is seen surrounding {monster_name} and its movements become faster and more deadly.")
                 aktivate = True
                 return aktivate
 
         elif pilihan_3 == '2':
             if dict_potion['resilience'] == 0:
-                print("Wah, kamu sedang tidak memiliki ramuan ini, silahkan pilih ramuan lain!")
+                print("Wah, you don't have this potion, please choose another potion!")
             elif num_potion[1] >= 1:
-                print(f"Kamu mencoba memberikan ramuan ini kepada {monster_name}, namun dia menolaknya seolah-olah dia memahami ramuan tersebut sudah tidak bermanfaat lagi.")
+                print(f"You try to give this potion to {monster_name}, but the monster refuses it as if monster understands the potion is no longer useful.")
             else:
                 num_potion[1] += 1
                 up_ability(monster_status,base_hp,max_hp,int(pilihan_3))
-                potion_inventory[find_index(potion_inventory,id,'resilience')]['quantity'] = str(int(potion_inventory[find_index(potion_inventory,str(id),'resilience')]['quantity']) - 1)
-                print(f"Setelah meminum ramuan ini, muncul sebuah energi pelindung di sekitar {monster_name} yang membuatnya terlihat semakin tangguh dan sulit dilukai.")
+                potion_inventory[find_index(potion_inventory,id,'resilience')]['quantity'] = str(int(potion_inventory[find_index(potion_inventory,id,'resilience')]['quantity']) - 1)
+                print(f"After drinking this potion, a protective energy appears around {monster_name} which makes it look tougher and harder to hurt.")
                 aktivate = True
                 return aktivate
 
         elif pilihan_3 == '3':
             if dict_potion['healing'] == 0:
-                print("Wah, kamu sedang tidak memiliki ramuan ini, silahkan pilih ramuan lain!")
+                print("Wah, you don't have this potion, please choose another potion!")
             elif num_potion[2] >= 1:
-                print(f"Kamu mencoba memberikan ramuan ini kepada {monster_name}, namun dia menolaknya seolah-olah dia memahami ramuan tersebut sudah tidak bermanfaat lagi.")
+                print(f"You try to give this potion to {monster_name}, but the monster refuses it as if monster understands the potion is no longer useful.")
             else:
                 num_potion[2] += 1
                 up_ability(monster_status,base_hp,max_hp,int(pilihan_3))
-                potion_inventory[find_index(potion_inventory,id,'healing')]['quantity'] = str(int(potion_inventory[find_index(potion_inventory,str(id),'healing')]['quantity']) - 1)
-                print(f"Setelah meminum ramuan ini, luka-luka yang ada di dalam tubuh {monster_name} sembuh dengan cepat. Dalam sekejap, {monster_name} terlihat kembali prima dan siap melanjutkan pertempuran.")
+                potion_inventory[find_index(potion_inventory,id,'healing')]['quantity'] = str(int(potion_inventory[find_index(potion_inventory,id,'healing')]['quantity']) - 1)
+                print(f"After drinking this potion, the wounds in {monster_name}'s body healed quickly. In an instant, {monster_name} looked fit again and ready to continue fighting.")
                 aktivate = True
                 return aktivate
 
@@ -102,4 +85,4 @@ def ui_potion(potion_inventory,monster_name,monster_status,base_hp,max_hp,id,num
             return aktivate
 
         else:
-            print("Perintah tidak ada di dalam pilihan")
+            print("The command is not in the options")
