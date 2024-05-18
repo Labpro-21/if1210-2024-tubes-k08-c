@@ -174,4 +174,4 @@ Level     : {list_monster_user[pilihan-1]['level']}""")
             break
 
 # print(load.csv_to_dict(os.path.join("data/","init/","user.csv")))
-battle('3',user,item_inventory,monster_inventory,monster_dict)
+# battle('3',user,item_inventory,monster_inventory,monster_dict)
