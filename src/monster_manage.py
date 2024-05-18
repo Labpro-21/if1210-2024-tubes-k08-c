@@ -1,93 +1,84 @@
-import load
-import os
-
-def tabel_monster(df):
+def tabel_monster(monster_dict):
     list_len = [[2],[4],[9],[9],[2]]
     max_len = []
-    for i in range(len(df)):
-        list_len[0].append(len(df[i]["id"]))
-        list_len[1].append(len(df[i]["type"]))
-        list_len[2].append(len(df[i]["atk_power"]))
-        list_len[3].append(len(df[i]["def_power"]))
-        list_len[4].append(len(df[i]["hp"]))
+    for i in range(len(monster_dict)):
+        list_len[0].append(len(str(monster_dict[i]["id"])))
+        list_len[1].append(len(monster_dict[i]["type"]))
+        list_len[2].append(len(str(monster_dict[i]["atk_power"])))
+        list_len[3].append(len(str(monster_dict[i]["def_power"])))
+        list_len[4].append(len(str(monster_dict[i]["hp"])))
 
     for i in list_len:
         max_len.append(max(i))
 
     print(f"ID{' '*(max_len[0] - 2)} | Type{' '*(max_len[1] - 4)} | ATK Power{' '*(max_len[2] - 9)} | DEF Power{' '*(max_len[3] - 9)} | HP{' '*(max_len[4] - 2)}" )
-    for i in range(len(df)):
-        print(f"{df[i]["id"]}{" "*(max_len[0] - list_len[0][i+1])} | {df[i]["type"]}{" "*(max_len[1] - list_len[1][i+1])} | {df[i]["atk_power"]}{" "*(max_len[2] - list_len[2][i+1])} | {df[i]["def_power"]}{" "*(max_len[3] - list_len[3][i+1])} | {df[i]["hp"]}{" "*(max_len[4] - list_len[4][i+1])}")
+    for i in range(len(monster_dict)):
+        print(f"{monster_dict[i]["id"]}{" "*(max_len[0] - list_len[0][i+1])} | {monster_dict[i]["type"]}{" "*(max_len[1] - list_len[1][i+1])} | {monster_dict[i]["atk_power"]}{" "*(max_len[2] - list_len[2][i+1])} | {monster_dict[i]["def_power"]}{" "*(max_len[3] - list_len[3][i+1])} | {monster_dict[i]["hp"]}{" "*(max_len[4] - list_len[4][i+1])}")
     print("\n")
 
-def csv_append(df_path,id,type_name,atk_power,def_power,hp):
-    csv_file = open(df_path,"a")
-    csv_file.writelines(f"\n{id};{type_name};{atk_power};{def_power};{hp}")
-    csv_file.close()
-
-def ui_monster():
-    df_path = os.path.join("data/","init/","monster.csv")
+def ui_monster(monster_dict):
     min_def,max_def = 0,50
     while True:
-        df = load.csv_to_dict(df_path)
-        list_name = [df[i]['type'] for i in range(len(df))]
-        print("""SELAMAT DATANG DI DATABASE PARA MONSTER !!!
-1. Tampilkan semua Monster pada database
-2. Tambah Monster baru
-3. Keluar
+        list_name = [monster_dict[i]['type'] for i in range(len(monster_dict))]
+        print("""WELCOME TO THE MONSTER DATABASE!!!
+1. Display all Monsters in the database
+2. Add new Monsters
+3. Exit
 """)
-        pilihan = input("Pilih Aksi : ")
+        pilihan = input("Select a command: ")
         if pilihan == "1":
-            tabel_monster(df)
+            tabel_monster(monster_dict)
         elif pilihan == "2":
-            id = str(int(df[len(df)-1]["id"])+1)
+            id = str(int(monster_dict[len(monster_dict)-1]["id"])+1)
             while True:
-                type_name = input("Masukkan Type / Nama : ")
+                type_name = input("Enter Type / Name: ")
                 if type_name not in list_name:
                     break
                 else:
-                    print("Nama sudah terdaftar, coba lagi!\n")
+                    print("Name has been registered, try again!\n")
             while True:
-                atk_power = input("Masukkan ATK Power : ")
+                atk_power = input("Enter ATK Power : ")
                 if atk_power.isdigit():
                     break
                 else:
-                    print("Masukkan input berupa Integer, coba lagi!\n")
+                    print("Enter input in the form of an Integer, try again!\n")
             while True:
-                def_power = input("Masukkan DEF Power : ")
+                def_power = input("Enter DEF Power: ")
                 if def_power.isdigit():
                     if min_def <= int(def_power) <= max_def:
                         break
                     else:
-                        print(f"DEF Power harus bernilai {min_def}-{max_def}, coba lagi!\n")
+                        print(f"DEF Power must be {min_def}-{max_def}, try again!\n")
                 else:
-                    print("Masukkan input berupa Integer, coba lagi!\n")
+                    print("Enter input in the form of an Integer, try again!\n")
             while True:
-                hp = input("Masukkan HP : ")
+                hp = input("Enter HP: ")
                 if hp.isdigit():
                     break
                 else:
-                    print("Masukkan input berupa Integer, coba lagi!\n")
+                    print("Enter input in the form of an Integer, try again!\n")
 
             print(f"""
-Monster baru berhasil dibuat!
+New monster successfully created!
 Type : {type_name}
 ATK Power : {atk_power}
 DEF Power : {def_power}
 HP : {hp}
 """)
             while True:
-                pilihan2 = input("Tambahkan Monster ke Database (Y/N): ")
+                pilihan2 = input("Add Monster to Database (Y/N): ")
                 if pilihan2 == "Y" or pilihan2 == "y":
-                    csv_append(df_path,id,type_name,atk_power,def_power,hp)
-                    print("Monster berhasil ditambahkan!\n")
+                    monster_dict.append({'id':id,'type':type_name,'atk_power':atk_power,'def_power':def_power,'hp':hp})
+                    print("Monster added successfully!\n")
                     break
                 elif pilihan2 == "N" or pilihan2 == "n":
-                    print("Monster gagal ditambahkan!\n")
+                    print("Monster failed to add!\n")
                     break
                 else:
-                    print("Masukkan tidak valid")
+                    print("Invalid command")
         elif pilihan == "3":
+            print("You are logged out of the DATABASE")
             break
 
         else:
-            print("Masukkan tidak valid")
+            print("invalid command")

@@ -12,7 +12,7 @@ monster_inventory = [{'user_id': '2', 'monster_id': '1', 'level': '1'}, {'user_i
 monster_dict = [{'id': '1', 'type': 'Pikachow', 'atk_power': '125', 'def_power': '10', 'hp': '600'}, {'id': '2', 'type': 'Bulbu', 'atk_power': '50', 'def_power': '50', 'hp': '1200'}, {'id': '3', 'type': 'Zeze', 'atk_power': '300', 'def_power': '10', 'hp': '100'}, {'id': '4', 'type': 'Zuko', 'atk_power': '100', 'def_power': '25', 'hp': '800'}, {'id': '5', 'type': 'Chacha', 'atk_power': '80', 'def_power': '30', 'hp': '7006'}]
 user = [{'id': '1', 'username': 'Mr_Monogram', 'password': 'monogrammer77', 'role': 'admin', 'oc': '0'}, {'id': '2', 'username': 'Asep_Spakbor', 'password': 'asepwow123', 'role': 'agent', 'oc': '9999'}, {'id': '3', 'username': 'Agen_P', 'password': 'platypus123', 'role': 'agent', 'oc': '0'}, {'id': '4', 'username': 'B4ngk1dd0ssss', 'password': 'bangkitganteng', 'role': 'agent', 'oc': '1337'}, {'id': '5', 'username': 'Kenny_agen_rahasia', 'password': 'kribogeming55', 'role': 'agent', 'oc': '6699'}]
 
-def user_id_monster(monster_inventory : list[dict[int,str,str]], id: int) -> list[dict[int,str,str]]: # fungsi untuk mengambil monster bergantung pada user_id
+def user_id_monster(monster_inventory : list[dict[int]], id: int) -> list[dict[int]]: # fungsi untuk mengambil monster bergantung pada user_id
     list_monster = []
     for i in monster_inventory:
         if i['user_id'] == id:
@@ -20,12 +20,12 @@ def user_id_monster(monster_inventory : list[dict[int,str,str]], id: int) -> lis
 
     return list_monster
 
-def name_user(id: int, user: list[dict[int,str,str,str,str]]) -> str: # fungsi untuk menentukan nama dari id yang diberikan
+def name_user(id: int, user: list[dict[int]]) -> str: # fungsi untuk menentukan nama dari id yang diberikan
     for i in user:
         if i['id'] == id:
             return i['username']
 
-def battle(id: int, user: list[dict[int,str,str,str,str]], item_inventory: list[dict[int,str,str]], monster_inventory: list[dict[int,str,str]], monster_dict: list[int,str,str,str,str]) -> None: # fungsi utama
+def battle(id: int, user: list[dict[int,str,str,str,str]], item_inventory: list[dict[int,str,int]], monster_inventory: list[dict[int]], monster_dict: list[int,str,int,int,int]) -> None: # fungsi utama
     random_num = lcg.randint1(0,len(monster_dict)-1)
     type_monster = monster_dict[random_num]
     level_monster = lcg.randint1(1,5)

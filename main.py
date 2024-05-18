@@ -17,6 +17,7 @@ import src.logout as logout
 # import src.shop as shop
 import src.inventory as inv
 import src.battle as bat
+import src.monster_manage as mons_mng
 
 # data loading
 
@@ -46,6 +47,9 @@ while logged_in:
     logged_coin = user_data[logged_id - 1]['oc']
     print("Use the command 'HELP' to see available actions")
     game_choice = input("").upper()
+    if logged_status == "admin":
+        if game_choice == "MONSTER":
+            mons_mng.ui_monster(monster_data)
     if game_choice == "HELP":
         menu.help_ui(logged_status, logged_username)
     elif game_choice == "LOGOUT":
