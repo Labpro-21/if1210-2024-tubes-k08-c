@@ -1,4 +1,4 @@
-    # fungsi untuk mengecek keberadaan suatu elemen dalam list of dictionaries
+# fungsi untuk mengecek keberadaan suatu elemen dalam list of dictionaries
 def exist(list_of_dict,n,category):
     for i in range(len(list_of_dict)):
         if list_of_dict[i][category] == n:
@@ -46,7 +46,7 @@ def laboratory(inv_monster_data, monster_data,users_data,user_id):
         for i in range(len(inv_monster_data)):
             if inv_monster_data[i]["user_id"] == user_id:
                 monster_index = index(monster_data,inv_monster_data[i]["monster_id"],"id")
-                print(f"{no}. {monster_data[monster_index]["type"]} (level {inv_monster_data[i]["level"]})")
+                print(f"{no}. {monster_data[monster_index]['type']} (level {inv_monster_data[i]['level']})")
                 current_user_monsters.append({"current_monster_id" : monster_data[monster_index]["id"]})
                 current_user_monsters[no-1]["number"] = str(no)
                 no += 1
