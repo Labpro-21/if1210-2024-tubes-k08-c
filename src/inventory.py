@@ -66,7 +66,7 @@ Jumlah O.W.C.A. Coin-mu sekarang {oc}.""")
             print(f"{number}. Monster       (Name: {monster[i]['type']}, Lvl: {monster[i]['level']}, HP: {monster[i]['hp']})")
         for i in range(len(item)):
             number +=1
-            print(f"{number}. Potion        (Type: {item[i]['type']}, Qty: {item[i]["quantity"]})")
+            print(f"{number}. Potion        (Type: {item[i]['type']}, Qty: {item[i]['quantity']})")
     else:
         print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         print("Tidak ada barang di Inventory kamu. (┬┬﹏┬┬)")

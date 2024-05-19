@@ -15,6 +15,7 @@ import src.exit_kill as exit_kill
 import src.menu_help as menu
 import src.logout as logout
 # import src.shop as shop
+import src.management_shop as shop_mng
 import src.inventory as inv
 import src.battle as bat
 import src.monster_manage as mons_mng
@@ -60,7 +61,7 @@ while logged_in:
             pass
             # shop.shop()
         elif logged_status == "admin":
-            pass  # shop_management
+            shop_item_data, shop_monster_data = shop_mng.shop_management(monster_data, shop_item_data, shop_monster_data)
     elif game_choice == "INVENTORY":
         inv.inventory(logged_id, user_data, inv_item_data, inv_monster_data, monster_data)
     elif game_choice == "LAB":
