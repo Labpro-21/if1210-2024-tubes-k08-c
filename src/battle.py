@@ -26,10 +26,53 @@ def name_user(id: int, user: list[dict[int]]) -> str: # fungsi untuk menentukan 
         if i['id'] == id:
             return i['username']
 
-def battle(id: int, user: list[dict[int,str,str,str,str]], item_inventory: list[dict[int,str,int]], monster_inventory: list[dict[int]], monster_dict: list[int,str,int,int,int]) -> None: # fungsi utama
+def select_monster (id: int, user: list[dict],list_monster_user):
+    def monster_n(n): # fungsi untuk listing monster sesuai dengan yang dimiliki player
+        return monster_dict[int(list_monster_user[n]["monster_id"])-1]
+    print("""============ MONSTER LIST ============""")
+    for i in range(len(list_monster_user)):
+        print(f"{i+1}. {monster_n(i)['type']}")
+
+    while True:
+        pilihan = int(input("\nPilih monster untuk bertarung: "))
+        if pilihan > len(list_monster_user):
+            print("Pilihan nomor tidak tersedia!")
+        else:
+            break
+
+    list_player_monster = monster.atribut(monster_n(pilihan-1),int(list_monster_user[pilihan-1]['level']))
+    max_hp_player = monster.level_hp(monster_n(pilihan-1),int(list_monster_user[pilihan-1]['level']))
+    base_hp_player = monster.level_hp(monster_n(pilihan-1),1)
+
+    print(f"""\n          /\\----/\\_   
+         /         \\   /|
+        |  | O    O | / |
+        |  | .vvvvv.|/  /
+       /   | |     |   /
+      /    | `^^^^^   /
+     | /|  |         /
+      / |    ___    |
+         \\  |   |   |
+         |  |   |   |
+          \\._\\   \\._\\ 
+
+RAWRRR, Agent {battle.name_user(id,user)} mengeluarkan monster {monster_n(pilihan-1)['type']} !!!
+
+Name : {monster_n(pilihan-1)['type']}
+ATK Power : {list_player_monster[0]}
+DEF Power : {list_player_monster[1]}
+HP        : {list_player_monster[2]}
+Level     : {list_monster_user[pilihan-1]['level']}""")
+    return pilihan,list_player_monster,max_hp_player,base_hp_player
+
+def battle(id: int, user: list[dict[int,str,str,str,str]], item_inventory: list[dict[int,str,int]], monster_inventory: list[dict[int]], monster_dict: list[int,str,int,int,int], level: int, pilihan: int,list_player_monster: list[int],max_hp_player: int,base_hp_player: int) -> None: # fungsi utama
+    # untuk battel aja yg masukan level hinnga base_hp_player masukin aja 0
     random_num = lcg.randint1(0,len(monster_dict)-1)
     type_monster = monster_dict[random_num]
-    level_monster = lcg.randint1(1,5)
+    if level ==0:
+        level_monster = lcg.randint1(1,5)
+    else:
+        level_monster = level
     skill_monster_enemy = monster.atribut(type_monster,level_monster)
     list_monster_user = user_id_monster(monster_inventory,id)
 
@@ -56,41 +99,12 @@ ATK Power : {skill_monster_enemy[0]}
 DEF Power : {skill_monster_enemy[1]}
 HP        : {skill_monster_enemy[2]}
 Level     : {level_monster}
+""")
+    if level == 0:
+        pilihan,list_player_monster,max_hp_player,base_hp_player = select_monster(id,user,list_monster_user)
 
-============ MONSTER LIST ============""")
-    for i in range(len(list_monster_user)):
-        print(f"{i+1}. {monster_n(i)['type']}")
-
-    while True:
-        pilihan = int(input("\nChosee the monster: "))
-        if pilihan > len(list_monster_user):
-            print("Number you choose is not available!")
-        else:
-            break
-
-    list_player_monster = monster.atribut(monster_n(pilihan-1),int(list_monster_user[pilihan-1]['level']))
-    max_hp_player = monster.level_hp(monster_n(pilihan-1),int(list_monster_user[pilihan-1]['level']))
-    base_hp_player = monster.level_hp(monster_n(pilihan-1),1)
-
-    print(f"""\n          /\\----/\\_   
-         /         \\   /|
-        |  | O    O | / |
-        |  | .vvvvv.|/  /
-       /   | |     |   /
-      /    | `^^^^^   /
-     | /|  |         /
-      / |    ___    |
-         \\  |   |   |
-         |  |   |   |
-          \\._\\   \\._\\ 
-
-RAWRRR, Agent {name_user(id,user)} use {monster_n(pilihan-1)['type']} !!!
-
-Name : {monster_n(pilihan-1)['type']}
-ATK Power : {list_player_monster[0]}
-DEF Power : {list_player_monster[1]}
-HP        : {list_player_monster[2]}
-Level     : {list_monster_user[pilihan-1]['level']}""")
+    hp_enemy = skill_monster_enemy[2]
+    hp_user = list_player_monster[2]
 
     turn_num = 1
     num_potion = [0,0,0]
@@ -127,9 +141,15 @@ Level     : {level_monster}
             
             if skill_monster_enemy[2] <= 0:
                 print(f"Congratulations, you have successfully defeated {type_monster['type']} !!!")
-                add_oc_coin = lcg.randint1(5*level_monster,30*level_monster)
-                user[int(id)-1]["oc"] = str(int(user[int(id)-1]["oc"])+add_oc_coin)
-                print(f"Total OC earned: {add_oc_coin}")
+                if level == 0:
+                    add_oc_coin = lcg.randint1(5*level_monster,30*level_monster)
+                    user[int(id)-1]["oc"] = str(int(user[int(id)-1]["oc"])+add_oc_coin)
+                    print(f"Total OC earned: {add_oc_coin}")
+                else:
+                    result = "menang"
+                    damage_dealt = hp_enemy
+                    damage_received = hp_user - list_player_monster[2]
+                    return(result,damage_dealt,damage_received)
                 break
             else:
                 hp_before_2 = list_player_monster[2]
@@ -152,13 +172,21 @@ Level     : {list_monster_user[pilihan-1]['level']}
 """)
                 if list_player_monster[2] <= 0:
                     print(f"Nooo, You are defeated by the monster {type_monster['type']}. Don't give up, try again!!!")
+                    if level != 0:
+                        result = "kalah"
+                        damage_dealt = hp_enemy - skill_monster_enemy[2]
+                        damage_received = hp_user
+                        return(result,damage_dealt,damage_received)
                     break
                 else:
                     turn_num += 1
 
         elif pilihan_2 == 2:
+            hp_before_potion = list_player_monster[2]
             aktivate = potion.ui_potion(item_inventory,monster_n(pilihan-1)['type'],list_player_monster,base_hp_player,max_hp_player,id,num_potion)
+            hp_after_potion = list_player_monster[2]
             if aktivate:
+                hp_user += (hp_after_potion-hp_before_potion)
                 hp_before_3 = list_player_monster[2]
                 monster.attack(list_player_monster,skill_monster_enemy[0])
                 hp_after_3 = list_player_monster[2]
@@ -180,13 +208,26 @@ HP        : {list_player_monster[2]}
 Level     : {list_monster_user[pilihan-1]['level']}""")
                 if list_player_monster[2] <= 0:
                     print(f"Yahhh, You are defeated by the monster {type_monster['type']}. Don't give up, try again!!!")
+                    if level != 0:
+                        result = "kalah"
+                        damage_dealt = hp_enemy - skill_monster_enemy[2]
+                        damage_received = hp_user
+                        return(result,damage_dealt,damage_received)
                     break
                 else:
                     turn_num += 1
         
         elif pilihan_2 == 3:
             print("You have successfully escaped the BATTLE!")
+            if level != 0:
+                result = "quit"
+                damage_dealt = hp_enemy - skill_monster_enemy[2]
+                damage_received = hp_user - list_player_monster[2]
+                return(result,damage_dealt,damage_received)
             break
+        else:
+            print("""
+Your input is invalid, please input again.""")
 
 # print(load.csv_to_dict(os.path.join("data/","init/","user.csv")))
 # battle('3',user,item_inventory,monster_inventory,monster_dict)
