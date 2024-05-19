@@ -66,7 +66,7 @@ Jumlah O.W.C.A. Coin-mu sekarang {oc}.""")
             print(f"{number}. Monster       (Name: {monster[i]['type']}, Lvl: {monster[i]['level']}, HP: {monster[i]['hp']})")
         for i in range(len(item)):
             number +=1
-            print(f"{number}. Potion        (Type: {item[i]['type']}, Qty: {item[i]["quantity"]})")
+            print(f"{number}. Potion        (Type: {item[i]['type']}, Qty: {item[i]['quantity']})")
     else:
         print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         print("Tidak ada barang di Inventory kamu. (┬┬﹏┬┬)")
@@ -111,4 +111,4 @@ def inventory (user_id:int,user:list[dict],item_inventory:list[dict],monster_inv
         print()
     return {'oc': user_oc, 'potion':user_item,'monster': user_monster}    
 
-print(inventory(3,user_data,inv_item_data,inv_monster_data,monster_data))
+# print(inventory(3,user_data,inv_item_data,inv_monster_data,monster_data))

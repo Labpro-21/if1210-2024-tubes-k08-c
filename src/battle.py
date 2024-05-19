@@ -1,9 +1,6 @@
 import lcg
-import os
 import monster
-import tabel
 import potion
-import load
 
 # Parameter user untuk file user.csv
 # Parameter monster_inventory untuk file monster_inventory.csv
@@ -15,20 +12,20 @@ monster_inventory = [{'user_id': '2', 'monster_id': '1', 'level': '1'}, {'user_i
 monster_dict = [{'id': '1', 'type': 'Pikachow', 'atk_power': '125', 'def_power': '10', 'hp': '600'}, {'id': '2', 'type': 'Bulbu', 'atk_power': '50', 'def_power': '50', 'hp': '1200'}, {'id': '3', 'type': 'Zeze', 'atk_power': '300', 'def_power': '10', 'hp': '100'}, {'id': '4', 'type': 'Zuko', 'atk_power': '100', 'def_power': '25', 'hp': '800'}, {'id': '5', 'type': 'Chacha', 'atk_power': '80', 'def_power': '30', 'hp': '7006'}]
 user = [{'id': '1', 'username': 'Mr_Monogram', 'password': 'monogrammer77', 'role': 'admin', 'oc': '0'}, {'id': '2', 'username': 'Asep_Spakbor', 'password': 'asepwow123', 'role': 'agent', 'oc': '9999'}, {'id': '3', 'username': 'Agen_P', 'password': 'platypus123', 'role': 'agent', 'oc': '0'}, {'id': '4', 'username': 'B4ngk1dd0ssss', 'password': 'bangkitganteng', 'role': 'agent', 'oc': '1337'}, {'id': '5', 'username': 'Kenny_agen_rahasia', 'password': 'kribogeming55', 'role': 'agent', 'oc': '6699'}]
 
-def user_id_monster(monster_inventory,id): # fungsi untuk mengambil monster bergantung pada user_id
+def user_id_monster(monster_inventory : list[dict[int]], id: int) -> list[dict[int]]: # fungsi untuk mengambil monster bergantung pada user_id
     list_monster = []
     for i in monster_inventory:
-        if i["user_id"] == str(id):
+        if i['user_id'] == id:
             list_monster.append(i)
 
     return list_monster
 
-def name_user(id,user): # fungsi untuk menentukan nama dari id yang diberikan
+def name_user(id: int, user: list[dict[int]]) -> str: # fungsi untuk menentukan nama dari id yang diberikan
     for i in user:
-        if i['id'] == str(id):
+        if i['id'] == id:
             return i['username']
 
-def battle(id,user,item_inventory,monster_inventory,monster_dict): # fungsi utama
+def battle(id: int, user: list[dict[int,str,str,str,str]], item_inventory: list[dict[int,str,int]], monster_inventory: list[dict[int]], monster_dict: list[int,str,int,int,int]) -> None: # fungsi utama
     random_num = lcg.randint1(0,len(monster_dict)-1)
     type_monster = monster_dict[random_num]
     level_monster = lcg.randint1(1,5)
@@ -51,7 +48,7 @@ def battle(id,user,item_inventory,monster_inventory,monster_dict): # fungsi utam
       `'   |  _      |
         _.-'-' `-'-'.'_
    __.-'               '-.__
-RAWRRR, Monster {type_monster['type']} telah muncul !!!
+RAWRRR, Monster {type_monster['type']} has appeared !!!
 
 Name      : {type_monster['type']}
 ATK Power : {skill_monster_enemy[0]}
@@ -64,9 +61,9 @@ Level     : {level_monster}
         print(f"{i+1}. {monster_n(i)['type']}")
 
     while True:
-        pilihan = int(input("\nPilih monster untuk bertarung: "))
+        pilihan = int(input("\nChosee the monster: "))
         if pilihan > len(list_monster_user):
-            print("Pilihan nomor tidak tersedia!")
+            print("Number you choose is not available!")
         else:
             break
 
@@ -86,7 +83,7 @@ Level     : {level_monster}
          |  |   |   |
           \\._\\   \\._\\ 
 
-RAWRRR, Agent {name_user(id,user)} mengeluarkan monster {monster_n(pilihan-1)['type']} !!!
+RAWRRR, Agent {name_user(id,user)} use {monster_n(pilihan-1)['type']} !!!
 
 Name : {monster_n(pilihan-1)['type']}
 ATK Power : {list_player_monster[0]}
@@ -105,14 +102,14 @@ Level     : {list_monster_user[pilihan-1]['level']}""")
 3. Quit
 """)
             
-        pilihan_2 = int(input("Pilih perintah: "))
+        pilihan_2 = int(input("Select a command: "))
         if pilihan_2 == 1:
             monster.attack(skill_monster_enemy,int(list_player_monster[0]))
 
             if skill_monster_enemy[2] <= 0:
                 skill_monster_enemy[2] = 0
             
-            print(f"""\n{monster_n(pilihan-1)['type']}, menyerang {type_monster['type']} !!!
+            print(f"""\n{monster_n(pilihan-1)['type']}, attack {type_monster['type']} !!!
 
 Name      : {type_monster['type']}
 ATK Power : {skill_monster_enemy[0]}
@@ -122,10 +119,10 @@ Level     : {level_monster}
 """)
             
             if skill_monster_enemy[2] <= 0:
-                print(f"Selamat, Anda berhasil mengalahkan monster {type_monster['type']} !!!")
+                print(f"Congratulations, you have successfully defeated {type_monster['type']} !!!")
                 add_oc_coin = lcg.randint1(5*level_monster,30*level_monster)
                 user[int(id)-1]["oc"] = str(int(user[int(id)-1]["oc"])+add_oc_coin)
-                print(f"Total OC yang diperoleh: {add_oc_coin}")
+                print(f"Total OC earned: {add_oc_coin}")
                 break
             else:
                 monster.attack(list_player_monster,skill_monster_enemy[0])
@@ -133,7 +130,7 @@ Level     : {level_monster}
                     list_player_monster[2] = 0
                 print(f"""
 ============ TURN {turn_num} {type_monster['type']} ============
-SCHWINKKK, {type_monster['type']} menyerang {monster_n(pilihan-1)['type']} !!!
+SCHWINKKK, {type_monster['type']} attack {monster_n(pilihan-1)['type']} !!!
 
 Name      : {monster_n(pilihan-1)['type']}
 ATK Power : {list_player_monster[0]}
@@ -142,7 +139,7 @@ HP        : {list_player_monster[2]}
 Level     : {list_monster_user[pilihan-1]['level']}
 """)
                 if list_player_monster[2] <= 0:
-                    print("Yahhh, Anda dikalahkan monster Zuko. Jangan menyerah, coba lagi !!!")
+                    print(f"Yahhh, You are defeated by the monster {type_monster['type']}. Don't give up, try again!!!")
                     break
                 else:
                     turn_num += 1
@@ -156,7 +153,7 @@ Level     : {list_monster_user[pilihan-1]['level']}
                 print(f"""
 ============ TURN {turn_num} {type_monster['type']} ============
 
-SCHWINKKK, {type_monster['type']} menyerang {monster_n(pilihan-1)['type']} !!!
+SCHWINKKK, {type_monster['type']} attack {monster_n(pilihan-1)['type']} !!!
 
 Name      : {monster_n(pilihan-1)['type']}
 ATK Power : {list_player_monster[0]}
@@ -164,14 +161,14 @@ DEF Power : {list_player_monster[1]}
 HP        : {list_player_monster[2]}
 Level     : {list_monster_user[pilihan-1]['level']}""")
                 if list_player_monster[2] <= 0:
-                    print("Yahhh, Anda dikalahkan monster Zuko. Jangan menyerah, coba lagi !!!")
+                    print(f"Yahhh, You are defeated by the monster {type_monster['type']}. Don't give up, try again!!!")
                     break
                 else:
                     turn_num += 1
         
         elif pilihan_2 == 3:
-            print("Anda berhasil kabur dari BATTLE!")
+            print("You successfully to escape the BATTLE!")
             break
 
 # print(load.csv_to_dict(os.path.join("data/","init/","user.csv")))
-battle('3',user,item_inventory,monster_inventory,monster_dict)
+# battle('3',user,item_inventory,monster_inventory,monster_dict)

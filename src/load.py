@@ -1,5 +1,6 @@
 import argparse
 import os
+import time
 
 
 def csv_to_dict(file_name: str) -> list[dict]:
@@ -8,21 +9,10 @@ def csv_to_dict(file_name: str) -> list[dict]:
     with open(file_name, 'r') as file:
         lines = []
         line = ''
-        while True:
-            # reads the file one-by-one
-            char = file.read(1)
-            # breaks when it reaches the end
-            if char == '':
-                if line != "":
-                    lines.append(line)
-                break
-            # add a line if line end is reached
-            if char == '\n':
-                lines.append(line)
-                line = ''
-            # add char to line
-            else:
-                line += char
+        for line in file:
+            if line[-1] == "\n":
+                line = line[:-1]
+            lines.append(line)
 
         # get headers for dict
         headers = []
@@ -93,7 +83,10 @@ def load_files() -> (list[dict],
         exit()
     # folder found
     if os.path.isdir(target_path):
-        print("Initializing......")
+        print("Initializing")
+        for i in range(10):
+            print(".", end="",flush=True)
+            time.sleep(0.1)
         # get files paths
         users_path = os.path.join(target_path, "user.csv")
         monster_data_path = os.path.join(target_path, "monster.csv")
