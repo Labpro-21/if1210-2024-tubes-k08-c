@@ -23,11 +23,11 @@ def view(monster_data: list[dict],
          display_monster_shop: list[dict],
          display_item_shop: list[dict]
          ):
-    choice = str(input("MONSTER / ITEM "))
+    choice = str(input("MONSTER / ITEM: "))
     if choice.lower() == "monster":
-        tabulasi.tabel(display_monster_shop, ['id', 'type', 'atk_power', 'def_power', 'hp', 'stock', 'price'])
+        tabulasi.tabel(display_monster_shop, ['ID', 'Type', 'Atk Power', 'Def Power', 'HP', 'Stock', 'Price'])
     elif choice.lower() == "item":
-        tabulasi.tabel(display_item_shop, ['item_id', 'type', 'stock', 'price'])
+        tabulasi.tabel(display_item_shop, ['Item ID', 'Type', 'Stock', 'Price'])
 
 
 # add option
@@ -36,13 +36,13 @@ def add(monster_data: list[dict],
         shop_monster_data: list[dict],
         display_item_shop: list[dict]
         ):
-    choice = str(input("MONSTER / ITEM "))
+    choice = str(input("MONSTER / ITEM: "))
     if choice.lower() == "monster":
         unsold_mons = []
         for i in range(len(monster_data)):
             if not exist(shop_monster_data, monster_data[i]['monster_id'], "id"):
                 unsold_mons.append(monster_data[i])
-        tabulasi.tabel(unsold_mons, ['id', 'type', 'atk_power', 'def_power', 'hp'])
+        tabulasi.tabel(unsold_mons, ['ID', 'Type', 'Atk Power', 'Def Power', 'HP'])
         monsterid = int(input("Enter Monster ID: "))
         initialstock = input("Enter initial stock: ")
         price = input("Enter price: ")
@@ -73,7 +73,7 @@ def edit(monster_data: list[dict],
          display_item_shop: list[dict]):
     choice = str(input("MONSTER / ITEM "))
     if choice.lower() == "monster":
-        tabulasi.tabel(display_monster_shop, ['id', 'type', 'atk_power', 'def_power', 'hp', 'stock', 'price'])
+        tabulasi.tabel(display_monster_shop, ['ID', 'Type', 'Atk Power', 'Def Power', 'HP', 'Stock', 'Price'])
         monsterid = int(input("Enter Monster ID: "))
         newstock = input("Enter new stock: ")
         newprice = input("Enter new price: ")
@@ -89,7 +89,7 @@ def edit(monster_data: list[dict],
             print(
                 f"{monster_data[monsterid - 1]['type']} has been restocked with a quantity of {newstock} and has been updated with a price of {newprice}!")
     elif choice.lower() == "item":
-        tabulasi.tabel(display_item_shop, ['item_id', 'type', 'stock', 'price'])
+        tabulasi.tabel(display_item_shop, ['Item ID', 'Type', 'Stock', 'Price'])
         itemid = int(input("Enter Item id: "))
         newstock = input("Enter new stock: ")
         newprice = input("Enter new price: ")
@@ -113,16 +113,16 @@ def delete(monster_data: list[dict],
            shop_monster_data: list[dict],
            display_monster_shop: list[dict],
            display_item_shop: list[dict]):
-    choice = str(input("MONSTER / ITEM "))
+    choice = str(input("MONSTER / ITEM: "))
     if choice.lower() == "monster":
-        tabulasi.tabel(display_monster_shop, ['id', 'type', 'atk_power', 'def_power', 'hp', 'stock', 'price'])
+        tabulasi.tabel(display_monster_shop, ['ID', 'Type', 'ATK Power', 'Def Power', 'hp', 'stock', 'price'])
         monsterid = int(input("Enter Monster ID: "))
         yn = str(input(f"Are you sure you want to delete {monster_data[monsterid - 1]['type']} from the shop? (y/n) "))
         if yn.lower() == 'y':
             shop_monster_data[monsterid]["stock"] = 0
             print(f"{monster_data[monsterid - 1]['type']} has been deleted from the shop!")
     elif choice.lower() == "item":
-        tabulasi.tabel(display_item_shop, ['item_id', 'type', 'stock', 'price'])
+        tabulasi.tabel(display_item_shop, ['Item ID', 'Type', 'Stock', 'Price'])
         itemid = int(input("Enter Item id: "))
         yn = str(input(f"Are you sure you want to delete {shop_item_data[itemid - 1]['type']} from the shop? (y/n) "))
         if yn.lower() == 'y':
@@ -153,7 +153,7 @@ def shop_management(
 
     # assume the user's input is always valid
     while True:
-        option = str(input("OPTIONS: VIEW / ADD / EDIT / DELETE / EXIT "))
+        option = str(input("OPTIONS: VIEW / ADD / EDIT / DELETE / EXIT: "))
         if option.lower() == 'view':
             view(monster_dat, shop_item_dat, shop_monster_dat, display_monster, display_item)
         elif option.lower() == 'add':
