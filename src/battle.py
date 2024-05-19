@@ -1,6 +1,7 @@
 import lcg
 import monster
 import potion
+import time
 
 # Parameter user untuk file user.csv
 # Parameter monster_inventory untuk file monster_inventory.csv
@@ -113,9 +114,10 @@ Level     : {list_monster_user[pilihan-1]['level']}""")
                 skill_monster_enemy[2] = 0
             
             print(f"""
-SCHWINKKK, {monster_n(pilihan-1)['type']} attack {type_monster['type']} !!!
-{type_monster['type']} takes {damage_dealt} damage
-
+SCHWINKKK, your {monster_n(pilihan-1)['type']} attacks {type_monster['type']} !!!
+Enemy {type_monster['type']} takes {damage_dealt} damage""")
+            time.sleep(2)
+            print(f"""
 Name      : {type_monster['type']}
 ATK Power : {skill_monster_enemy[0]}
 DEF Power : {skill_monster_enemy[1]}
@@ -138,9 +140,10 @@ Level     : {level_monster}
                     list_player_monster[2] = 0
                 print(f"""
 ============ TURN {turn_num} {type_monster['type']} ============
-SCHWINKKK, {type_monster['type']} attack {monster_n(pilihan-1)['type']} !!!
-{monster_n(pilihan-1)['type']} takes {damage_dealt_2} damage
-
+SCHWINKKK, enemy {type_monster['type']} attacks your {monster_n(pilihan-1)['type']} !!!
+Your {monster_n(pilihan-1)['type']} takes {damage_dealt_2} damage""")
+                time.sleep(2)
+                print(f"""
 Name      : {monster_n(pilihan-1)['type']}
 ATK Power : {list_player_monster[0]}
 DEF Power : {list_player_monster[1]}
@@ -148,7 +151,7 @@ HP        : {list_player_monster[2]}
 Level     : {list_monster_user[pilihan-1]['level']}
 """)
                 if list_player_monster[2] <= 0:
-                    print(f"Yahhh, You are defeated by the monster {type_monster['type']}. Don't give up, try again!!!")
+                    print(f"Nooo, You are defeated by the monster {type_monster['type']}. Don't give up, try again!!!")
                     break
                 else:
                     turn_num += 1
@@ -166,9 +169,10 @@ Level     : {list_monster_user[pilihan-1]['level']}
                 print(f"""
 ============ TURN {turn_num} {type_monster['type']} ============
 
-SCHWINKKK, {type_monster['type']} attack {monster_n(pilihan-1)['type']} !!!
-{monster_n(pilihan-1)['type']} takes {damage_dealt_3} damage
-
+SCHWINKKK, enemy {type_monster['type']} attacks your {monster_n(pilihan-1)['type']} !!!
+Your {monster_n(pilihan-1)['type']} takes {damage_dealt_3} damage""")
+                time.sleep(2)
+                print(f"""
 Name      : {monster_n(pilihan-1)['type']}
 ATK Power : {list_player_monster[0]}
 DEF Power : {list_player_monster[1]}
@@ -181,7 +185,7 @@ Level     : {list_monster_user[pilihan-1]['level']}""")
                     turn_num += 1
         
         elif pilihan_2 == 3:
-            print("You successfully to escape the BATTLE!")
+            print("You have successfully escaped the BATTLE!")
             break
 
 # print(load.csv_to_dict(os.path.join("data/","init/","user.csv")))
