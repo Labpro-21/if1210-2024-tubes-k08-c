@@ -62,10 +62,13 @@ def gacha(user_id: int,
                     for slot_times in range(3):
                         slot_id = lcg.randint1(1, 5)
                         print("|", end="", flush=True)
-                        for i in range(4):
+                        for i in range(2):
                             print(" ", end="", flush=True)
                             time.sleep(0.25)
                         print(gacha_items[slot_id - 1]['item'], end="", flush=True)
+                        for i in range(2):
+                            print(" ", end="", flush=True)
+                            time.sleep(0.25)
                         rolled_item.append(gacha_items[slot_id - 1]['item'])
                         total_gains += gacha_items[slot_id - 1]['oc']
                     print()
