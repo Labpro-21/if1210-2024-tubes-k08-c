@@ -24,8 +24,8 @@ def textbox(text):
     print("╚" + "═" * (len(text) + 2) + "╝")
 
 
-def user_id_monster(monster_inventory: list[dict[int]], user_id: int) -> list[
-    dict[int]]:  # fungsi untuk mengambil monster bergantung pada user_id
+def user_id_monster(monster_inventory: list[dict[int]], user_id: int) \
+        -> list[dict[int]]:  # fungsi untuk mengambil monster bergantung pada user_id
     list_monster = []
     for i in monster_inventory:
         if i['user_id'] == user_id:
@@ -43,7 +43,7 @@ def monster_shop(display_monster_shop, shop_monster_data, inv_monster_data, user
     while True:
         user_id_monster_list = user_id_monster(inv_monster_data, user_id)
         tabulasi.tabel(display_monster_shop, ['ID', 'Type', 'ATK Power', 'DEF Power', 'HP', 'Stock', 'Price'])
-        buy = input("➤ ")
+        buy = input("➤ Monster ID / BACK : ")
         if buy.upper() == "BACK":
             break
         elif exist(shop_monster_data, int(buy), 'monster_id'):
@@ -60,6 +60,7 @@ def monster_shop(display_monster_shop, shop_monster_data, inv_monster_data, user
                         users_data[index(users_data, user_id, 'id')]["oc"] = str(
                             int(users_data[index(users_data, user_id, 'id')]["oc"]) - int(
                                 shop_monster_data[index(shop_monster_data, int(buy), 'monster_id')]['price']))
+                        break
                     elif confirm.upper() == "N":
                         break
                 else:
@@ -163,24 +164,24 @@ def shop(shop_monster_data, monster_data, inv_monster_data, shop_item_data, inv_
 ║ Ryo the Merchant ║
 ╚══════════════════╝
 """
-    display_monster_shop = []
-    for i in range(len(shop_monster_data)):
-        if exist(monster_data, shop_monster_data[i]['monster_id'], "id"):
-            display_monster_shop.append(monster_data[index(monster_data, shop_monster_data[i]['monster_id'], "id")])
-        display_monster_shop[i]['stock'] = shop_monster_data[i]['stock']
-        display_monster_shop[i]['price'] = shop_monster_data[i]['price']
-
-    # inisiasi list of dictionaries baru untuk didisplay di item shop
-    display_item_shop = []
-    for i in range(len(shop_item_data)):
-        item = {'item_id': str(i + 1), 'type': shop_item_data[i]['type'], 'stock': shop_item_data[i]['stock'],
-                'price': shop_item_data[i]['price']}
-        display_item_shop.append(item)
 
     while True:
+        display_monster_shop = []
+        for i in range(len(shop_monster_data)):
+            if exist(monster_data, shop_monster_data[i]['monster_id'], "id"):
+                display_monster_shop.append(monster_data[index(monster_data, shop_monster_data[i]['monster_id'], "id")])
+            display_monster_shop[i]['stock'] = shop_monster_data[i]['stock']
+            display_monster_shop[i]['price'] = shop_monster_data[i]['price']
+
+        # inisiasi list of dictionaries baru untuk didisplay di item shop
+        display_item_shop = []
+        for i in range(len(shop_item_data)):
+            item = {'item_id': str(i + 1), 'type': shop_item_data[i]['type'], 'stock': shop_item_data[i]['stock'],
+                    'price': shop_item_data[i]['price']}
+            display_item_shop.append(item)
         print(npc, end="")
         textbox("Watcha Buyin? Are you in the mood for monster or item?")
-        choice = input("➤ ")
+        choice = input("➤ MONSTER / ITEM / EXIT :  ")
         if choice.upper() == "EXIT":
             break
         elif choice.upper() == "MONSTER":
