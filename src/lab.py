@@ -1,7 +1,7 @@
-import src.load as load
+
 import src.additionals.code_functions as code
 
-users_data, monster_data, inv_item_data, inv_monster_data, shop_item_data, shop_monster_data = load.load_files()
+
 
 upgrade_price = [100,200,300,500]
 

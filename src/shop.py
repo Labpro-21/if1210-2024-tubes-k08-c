@@ -4,7 +4,6 @@ import load
 import additionals.code_functions as code
 import additionals.design_functions as design
 
-users_data, monster_data, inv_item_data, inv_monster_data, shop_item_data, shop_monster_data = load.load_files()
 
 def user_id_monster(monster_inventory : list[dict[int]], user_id: int) -> list[dict[int]]: # fungsi untuk mengambil monster bergantung pada user_id
     list_monster = []
