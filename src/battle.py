@@ -104,12 +104,17 @@ Level     : {list_monster_user[pilihan-1]['level']}""")
             
         pilihan_2 = int(input("Select a command: "))
         if pilihan_2 == 1:
+            hp_before = skill_monster_enemy[2]
             monster.attack(skill_monster_enemy,int(list_player_monster[0]))
+            hp_after = skill_monster_enemy[2]
+            damage_dealt = hp_before - hp_after
 
             if skill_monster_enemy[2] <= 0:
                 skill_monster_enemy[2] = 0
             
-            print(f"""\n{monster_n(pilihan-1)['type']}, attack {type_monster['type']} !!!
+            print(f"""
+SCHWINKKK, {monster_n(pilihan-1)['type']} attack {type_monster['type']} !!!
+{type_monster['type']} takes {damage_dealt} damage
 
 Name      : {type_monster['type']}
 ATK Power : {skill_monster_enemy[0]}
@@ -125,12 +130,16 @@ Level     : {level_monster}
                 print(f"Total OC earned: {add_oc_coin}")
                 break
             else:
+                hp_before_2 = list_player_monster[2]
                 monster.attack(list_player_monster,skill_monster_enemy[0])
+                hp_after_2 = list_player_monster[2]
+                damage_dealt_2 = hp_before_2 - hp_after_2
                 if list_player_monster[2] <= 0:
                     list_player_monster[2] = 0
                 print(f"""
 ============ TURN {turn_num} {type_monster['type']} ============
 SCHWINKKK, {type_monster['type']} attack {monster_n(pilihan-1)['type']} !!!
+{monster_n(pilihan-1)['type']} takes {damage_dealt_2} damage
 
 Name      : {monster_n(pilihan-1)['type']}
 ATK Power : {list_player_monster[0]}
@@ -147,13 +156,18 @@ Level     : {list_monster_user[pilihan-1]['level']}
         elif pilihan_2 == 2:
             aktivate = potion.ui_potion(item_inventory,monster_n(pilihan-1)['type'],list_player_monster,base_hp_player,max_hp_player,id,num_potion)
             if aktivate:
+                hp_before_3 = list_player_monster[2]
                 monster.attack(list_player_monster,skill_monster_enemy[0])
+                hp_after_3 = list_player_monster[2]
+                damage_dealt_3 = hp_before_3 - hp_after_3
+
                 if list_player_monster[2] <= 0:
                     list_player_monster[2] = 0
                 print(f"""
 ============ TURN {turn_num} {type_monster['type']} ============
 
 SCHWINKKK, {type_monster['type']} attack {monster_n(pilihan-1)['type']} !!!
+{monster_n(pilihan-1)['type']} takes {damage_dealt_3} damage
 
 Name      : {monster_n(pilihan-1)['type']}
 ATK Power : {list_player_monster[0]}
