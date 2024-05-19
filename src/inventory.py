@@ -1,16 +1,15 @@
-
+def isnumeric(kata:str) -> bool:
+    cond = True
+    for i in range(len(kata)):
+        if not(kata[i] == "1" or kata[i] == "2" or kata[i] == "3" or kata[i] == "4" or kata[i] == "5" or kata[i] == "6" or kata[i] == "7" or kata[i] == "8" or kata[i] == "9" or kata[i] == "0"):
+            cond = False
+            break
+    return cond
 
 def ext_dict(data: dict, keys_other: list[str]) -> dict:
     row_dict = {}
     for j in keys_other:
         row_dict[j] = data[j]
-    # li_dict=[]
-    # for i in range(len(data)):
-    #     row_dict={}
-    #     if int(data[i][keys_id]) == id:
-    #         for j in keys_other:
-    #             row_dict[j] = data[i][j]
-    #         li_dict.append(row_dict)
     return row_dict
 
 
@@ -96,21 +95,33 @@ def inventory(user_id: int, user: list[dict], item_inventory: list[dict], monste
     user_item = item_inv(user_id, item_inventory)
     user_monster = monster_inv(user_id, monster_inventory, monster)
     ui_main_inventory(user_id, user_oc, user_item, user_monster)
-    print("Ketikkan id untuk menampilkan detail item:")
-    id_input = (input(">>> "))
-    print()
-    while not (id_input == "KELUAR"):
-        if id_input == "INV":
-            ui_main_inventory(user_id, user_oc, user_item, user_monster)
-        elif int(id_input) > len(user_monster) + len(user_item) or int(id_input) <= 0:
-            print("Maaf id yang dimasukkan tidak ada dipilihan.")
-        elif int(id_input) > len(user_monster):
-            ui_item_inventory(user_item[(int(id_input) - len(user_monster)) - 1])
-        else:
-            ui_monster_inventory(user_monster[int(id_input) - 1])
-        print("Ketikkan id untuk menampilkan detail item:")
-        id_input = (input(">>> "))
-        print()
+    if len(user_item)+len(user_monster) == 0:
+            return {'oc': user_oc, 'potion': user_item, 'monster': user_monster}
+    else:
+        while True:
+            print("""Ketikkan id untuk menampilkan detail item:
+(99:KELUAR, 0:INVENTORY)""")
+            id_input = (input(">>> "))
+            if isnumeric(id_input):
+                id_input = int(id_input)
+                if int(id_input) == 99:
+                    print()
+                    break
+                elif int(id_input) == 0:
+                    ui_main_inventory(user_id, user_oc, user_item, user_monster)
+                elif int(id_input) > len(user_monster) + len(user_item) or int(id_input) <= 0:
+                    print("Maaf id yang dimasukkan tidak ada dipilihan.")
+                elif int(id_input) > len(user_monster):
+                    ui_item_inventory(user_item[(int(id_input) - len(user_monster)) - 1])
+                else:
+                    ui_monster_inventory(user_monster[int(id_input) - 1])
+            else:
+                print("""Maaf input yang anda masukkan tidak sesuai !!
+                    
+Ketikkan id untuk menampilkan detail item:
+(99:KELUAR, 0:INVENTORY)""")
+                id_input = (input(">>> "))
     return {'oc': user_oc, 'potion': user_item, 'monster': user_monster}
 
-    # print(inventory(3,user_data,inv_item_data,inv_monster_data,monster_data))
+# print(inventory(3,user_data,inv_item_data,inv_monster_data,monster_data))
+# print(isnumeric("0"))
