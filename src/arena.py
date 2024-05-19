@@ -144,7 +144,8 @@ Level     : {level_monster}
 """)
             
             if skill_monster_enemy[2] <= 0:
-                print(f"""Selamat, Anda berhasil mengalahkan monster {type_monster['type']} !!!
+                print(f"""
+Selamat, Anda berhasil mengalahkan monster {type_monster['type']} !!!
                           """)
                 result = "menang"
                 damage_dealt = hp_enemy
@@ -166,7 +167,8 @@ HP        : {list_player_monster[2]}
 Level     : {list_monster_user[pilihan-1]['level']}
 """)
                 if list_player_monster[2] <= 0:
-                    print(f"""Yahhh, Anda dikalahkan monster {type_monster['type']}. Jangan menyerah, coba lagi !!!
+                    print(f"""
+Yahhh, Anda dikalahkan monster {type_monster['type']}. Jangan menyerah, coba lagi !!!
                           """)
                     result = "kalah"
                     damage_dealt = hp_enemy - skill_monster_enemy[2]
@@ -196,7 +198,8 @@ DEF Power : {list_player_monster[1]}
 HP        : {list_player_monster[2]}
 Level     : {list_monster_user[pilihan-1]['level']}""")
                 if list_player_monster[2] <= 0:
-                    print(f"""Yahhh, Anda dikalahkan monster {type_monster['type']}. Jangan menyerah, coba lagi !!!
+                    print(f"""
+Yahhh, Anda dikalahkan monster {type_monster['type']}. Jangan menyerah, coba lagi !!!
                           """)
                     result = "kalah"
                     damage_dealt = hp_enemy - skill_monster_enemy[2]
@@ -207,14 +210,17 @@ Level     : {list_monster_user[pilihan-1]['level']}""")
                     turn_num += 1
         
         elif pilihan_2 == 3:
-            print("""GAME OVER! Anda mengakhiri sesi latihan!
+            print("""
+GAME OVER! Anda mengakhiri sesi latihan!
                   """)
             result = "quit"
             damage_dealt = hp_enemy - skill_monster_enemy[2]
             damage_received = hp_user - list_player_monster[2]
             return(result,damage_dealt,damage_received)
+        else:
+            print("""
+Maaf input yang anda masukkan tidak ada di pilihan.""")
             break
-
 # PROGRAM UTAMA
 def arena (user_id:int, user_data: list[dict], item_inventory: list[dict], monster_inventory: list[dict], monster : list[dict]):
     print("""
