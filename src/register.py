@@ -26,7 +26,7 @@ def choose_monster(user_id: int, username: str, monster_data: list[dict], inv_mo
             print("Enter a valid number")
 
     # appending new monster to inv_monster
-    inv_monster_data.append({'id': user_id, 'monster_id': monster_choice, 'level': 1})
+    inv_monster_data.append({'user_id': user_id, 'monster_id': monster_choice, 'level': 1})
     print(f"Welcome Agent {username}. Let's beat Dr. Asep Spakbor with {monster_data[monster_choice-1]['type']}!")
     return inv_monster_data
 
