@@ -51,8 +51,10 @@ def monster_shop(display_monster_shop, shop_monster_data, inv_monster_data, user
                 if int(users_data[index(users_data, user_id, 'id')]["oc"]) >= int(
                         shop_monster_data[index(shop_monster_data, int(buy), 'monster_id')]['price']):
                     textbox(
-                        f"you currently have {users_data[index(users_data, user_id, 'id')]['oc']}. Are you sure you want to buy this? y/n")
-                    confirm = input("➤ ")
+                        f"you currently have {users_data[index(users_data, user_id, 'id')]['oc']}. "
+                        f"Are you sure you want to buy this for "
+                        f"{shop_monster_data[index(shop_monster_data, int(buy), 'monster_id')]['price']} OC? y/n")
+                    confirm = input("➤ Y/N ")
                     if confirm.upper() == "Y":
                         inv_monster_data.append({'user_id': user_id, 'monster_id': buy, 'level': '1'})
                         shop_monster_data[index(shop_monster_data, int(buy), 'monster_id')]['stock'] = str(
@@ -69,7 +71,7 @@ def monster_shop(display_monster_shop, shop_monster_data, inv_monster_data, user
                 textbox("nuh uh...it seems that you already have that monster")
         else:
             textbox(
-                "let me repeat myself, choose one of the monster i have by the id number or just get out of my shop")
+                "let me repeat myself, choose one of the monster I have by the id number or just get out of my shop")
 
 
 # fungsi untuk membuka shop khusus transaksi item
@@ -80,7 +82,7 @@ def item_shop(display_item_shop, inv_item_data, shop_item_data, users_data, user
     print()
     while True:
         tabulasi.tabel(display_item_shop, ['Item Id', 'Type', 'Stock', 'Price'])
-        buy = input("➤ ")
+        buy = input("➤ id / BACK : ")
         if buy.upper() == "BACK":
             break
         elif exist(display_item_shop, buy, 'item_id'):
@@ -95,7 +97,9 @@ def item_shop(display_item_shop, inv_item_data, shop_item_data, users_data, user
                     display_item_shop[int(buy) - 1]['price']) * qty:
                 while True:
                     textbox(
-                        f"you currently have {users_data[index(users_data, user_id, 'id')]['oc']}. Are you sure you want to buy this? y/n")
+                        f"you currently have {users_data[index(users_data, user_id, 'id')]['oc']}. "
+                        f"Are you sure you want to buy this for "
+                        f"{int(display_item_shop[int(buy) - 1]['price']) * qty} OC? y/n")
                     confirm = input("➤ ")
                     if confirm.upper() == "Y":
                         include = False
@@ -120,7 +124,7 @@ def item_shop(display_item_shop, inv_item_data, shop_item_data, users_data, user
                 textbox("bruh you don't even have enough money... take a loan and comeback to me later")
         else:
             textbox(
-                "let me repeat myself, choose one of the monster i have by the id number or just get out of my shop")
+                "let me repeat myself, choose one of the monster I have by the id number or just get out of my shop")
 
 
 # fungsi general shop yang akan dipanggil di main
