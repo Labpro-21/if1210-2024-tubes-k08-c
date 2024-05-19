@@ -14,12 +14,12 @@ import src.login as login
 import src.exit_kill as exit_kill
 import src.menu_help as menu
 import src.logout as logout
-# import src.shop as shop
 import src.management_shop as shop_mng
 import src.inventory as inv
 import src.battle as bat
 import src.monster_manage as mons_mng
 import src.shop as shop
+import src.arena as arena
 
 # data loading
 
@@ -59,7 +59,7 @@ while logged_in:
         break
     elif game_choice == "SHOP":
         if logged_status == "agent":
-            shop.shop(shop_monster_data, monster_data, inv_monster_data, shop_item_data, inv_item_data, user_data)
+            shop.shop(shop_monster_data, monster_data, inv_monster_data, shop_item_data, inv_item_data, user_data, logged_id)
         elif logged_status == "admin":
             shop_item_data, shop_monster_data = shop_mng.shop_management(monster_data, shop_item_data, shop_monster_data)
     elif game_choice == "INVENTORY":
@@ -69,7 +69,7 @@ while logged_in:
     elif game_choice == "BATTLE":
         bat.battle(logged_id, user_data, inv_item_data, inv_monster_data, monster_data)
     elif game_choice == "ARENA":
-        pass  # arena
+        arena.arena(logged_id,user_data,inv_item_data,inv_monster_data,monster_data)
     elif game_choice == "GACHA":
         user_data, inv_monster_data = gacha.gacha(logged_id, logged_coin, user_data, monster_data, inv_monster_data)
     elif game_choice == "SAVE":
