@@ -85,8 +85,8 @@ def gacha(user_id: int,
                     user_coin = 0
                 else:
                     pass
-                if total_gains < 0:
-                    print(f"Oops, you lost {total_gains * -1} OC. Better luck next time")
+                if total_gains < 250:
+                    print(f"Oops, you lost {250-total_gains} OC. Better luck next time")
                 else:
                     print(f"Congrats, you gained {total_gains} OC. Come again !!!")
                 print(f"Your current balance is {user_coin} OC")
