@@ -46,7 +46,7 @@ while True:
     # main game phase
     while logged_in:
         # coin refresher
-        logged_coin = user_data[logged_id - 1]['oc']
+        logged_coin = int(user_data[logged_id - 1]['oc'])
         print("Use the command 'HELP' to see available actions")
         game_choice = input("").upper()
         if logged_status == "admin":
