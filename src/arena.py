@@ -254,4 +254,4 @@ def arena (user_id:int, user_data: list[dict], item_inventory: list[dict], monst
     return oc_received[stage-1]
             
 # TESTING
-print(arena('3',user,item_inventory,monster_inventory,monster_dict))
+# print(arena('3',user,item_inventory,monster_inventory,monster_dict))
