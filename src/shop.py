@@ -97,7 +97,7 @@ def item_shop(inv_item_data,shop_item_data,users_data,user_id):
                     break
             if int(users_data[index(users_data,user_id,'id')]["oc"]) >= int(display_item_shop[int(buy)-1]['price'])*qty:
                     while True:
-                        textbox(f"you currently have {users_data[index(users_data,user_id,'id')]["oc"]} oc and the price is {int(display_item_shop[int(buy)-1]['price'])*qty} oc, are you sure you want to buy this? y/n")
+                        textbox(f"you currently have {users_data[index(users_data,user_id,'id')]['oc']} oc and the price is {int(display_item_shop[int(buy)-1]['price'])*qty} oc, are you sure you want to buy this? y/n")
                         confirm = input("➤ ")
                         if confirm.upper() == "Y":
                             include = False
@@ -109,12 +109,12 @@ def item_shop(inv_item_data,shop_item_data,users_data,user_id):
                                 inv_item_data.append({"user_id": user_id,"type":display_item_shop[int(buy)-1]['type'],"quantity":1})
                             shop_item_data[int(buy)-1]["stock"] = str(int(shop_item_data[int(buy)-1]["stock"]) - qty)
                             users_data[index(users_data,user_id,'id')]["oc"] = str(int(users_data[index(users_data,user_id,'id')]["oc"]) - int(shop_item_data[int(buy)-1]['price'])*qty)
-                            textbox(f"thank you for your patronage! you currently have {users_data[index(users_data,user_id,'id')]["oc"]} oc left in your wallet")
+                            textbox(f"thank you for your patronage! you currently have {users_data[index(users_data,user_id,'id')]['oc']} oc left in your wallet")
                             break
                         elif confirm.upper() == "N":
                             break
             else:
-                textbox(f"you only have {users_data[index(users_data,user_id,'id')]["oc"]} oc lmao, come back when you have the money")
+                textbox(f"you only have {users_data[index(users_data,user_id,'id')]['oc']} oc lmao, come back when you have the money")
         else:
             textbox("let me repeat myself, choose one of the monster i have by typing the [ID] of the monster or get back to the main shop by typing [back]")
 
