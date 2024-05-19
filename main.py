@@ -19,6 +19,7 @@ import src.management_shop as shop_mng
 import src.inventory as inv
 import src.battle as bat
 import src.monster_manage as mons_mng
+import src.shop as shop
 
 # data loading
 
@@ -58,8 +59,7 @@ while logged_in:
         break
     elif game_choice == "SHOP":
         if logged_status == "agent":
-            pass
-            # shop.shop()
+            shop.shop(shop_monster_data, monster_data, inv_monster_data, shop_item_data, inv_item_data, user_data)
         elif logged_status == "admin":
             shop_item_data, shop_monster_data = shop_mng.shop_management(monster_data, shop_item_data, shop_monster_data)
     elif game_choice == "INVENTORY":
