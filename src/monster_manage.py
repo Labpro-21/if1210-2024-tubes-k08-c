@@ -13,7 +13,7 @@ def tabel_monster(monster_dict):
 
     print(f"ID{' '*(max_len[0] - 2)} | Type{' '*(max_len[1] - 4)} | ATK Power{' '*(max_len[2] - 9)} | DEF Power{' '*(max_len[3] - 9)} | HP{' '*(max_len[4] - 2)}" )
     for i in range(len(monster_dict)):
-        print(f"{monster_dict[i]["id"]}{" "*(max_len[0] - list_len[0][i+1])} | {monster_dict[i]["type"]}{" "*(max_len[1] - list_len[1][i+1])} | {monster_dict[i]["atk_power"]}{" "*(max_len[2] - list_len[2][i+1])} | {monster_dict[i]["def_power"]}{" "*(max_len[3] - list_len[3][i+1])} | {monster_dict[i]["hp"]}{" "*(max_len[4] - list_len[4][i+1])}")
+        print(f"""{monster_dict[i]['id']}{" "*(max_len[0] - list_len[0][i+1])} | {monster_dict[i]['type']}{" "*(max_len[1] - list_len[1][i+1])} | {monster_dict[i]['atk_power']}{" "*(max_len[2] - list_len[2][i+1])} | {monster_dict[i]['def_power']}{" "*(max_len[3] - list_len[3][i+1])} | {monster_dict[i]['hp']}{" "*(max_len[4] - list_len[4][i+1])}""")
     print("\n")
 
 def ui_monster(monster_dict):

@@ -67,7 +67,7 @@ def monster_shop(display_monster_shop,shop_monster_data,inv_monster_data,users_d
         elif code.exist(shop_monster_data,int(buy),'monster_id'):
             if not code.exist(user_id_monster_list,buy,'monster_id'):
                 if int(users_data[code.index(users_data,user_id,'id')]["oc"]) >= int(shop_monster_data[code.index(shop_monster_data,int(buy),'monster_id')]['price']):
-                    design.textbox(f"you currently have {users_data[code.index(users_data,user_id,'id')]["oc"]}. Are you sure you want to buy this? y/n")
+                    design.textbox(f"you currently have {users_data[code.index(users_data,user_id,'id')]['oc']}. Are you sure you want to buy this? y/n")
                     confirm = input("➤ ")
                     if confirm.upper() == "Y":
                         inv_monster_data.append({'user_id':user_id,'monster_id':buy,'level':'1'})
@@ -103,7 +103,7 @@ def item_shop(display_item_shop,inv_item_data,shop_item_data,users_data,user_id)
                     print("it seems that i don't have that many items. please lower your demand")
             if int(users_data[code.index(users_data,user_id,'id')]["oc"]) >= int(display_item_shop[int(buy)-1]['price'])*qty:
                     while True:
-                        design.textbox(f"you currently have {users_data[code.index(users_data,user_id,'id')]["oc"]}. Are you sure you want to buy this? y/n")
+                        design.textbox(f"you currently have {users_data[code.index(users_data,user_id,'id')]['oc']}. Are you sure you want to buy this? y/n")
                         confirm = input("➤ ")
                         if confirm.upper() == "Y":
                             include = False
