@@ -4,7 +4,6 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "src"))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "data"))
 
-
 import src.load as load
 import src.save as save
 import src.ascii_art as art
@@ -39,10 +38,9 @@ while not logged_in:
             = register.register_ui(user_data, monster_data, inv_monster_data)
     elif login_choice == "EXIT":
         exit_kill.exit_kill(user_data, monster_data, inv_item_data, inv_monster_data, shop_item_data, shop_monster_data)
-        game_running = False
     else:
         print("choose a valid option")
-logged_status = user_data[logged_id-1]['role']
+logged_status = user_data[logged_id - 1]['role']
 # main game phase
 while logged_in:
     # coin refresher
@@ -59,9 +57,11 @@ while logged_in:
         break
     elif game_choice == "SHOP":
         if logged_status == "agent":
-            shop.shop(shop_monster_data, monster_data, inv_monster_data, shop_item_data, inv_item_data, user_data, logged_id)
+            shop.shop(shop_monster_data, monster_data, inv_monster_data, shop_item_data, inv_item_data, user_data,
+                      logged_id)
         elif logged_status == "admin":
-            shop_item_data, shop_monster_data = shop_mng.shop_management(monster_data, shop_item_data, shop_monster_data)
+            shop_item_data, shop_monster_data = shop_mng.shop_management(monster_data, shop_item_data,
+                                                                         shop_monster_data)
     elif game_choice == "INVENTORY":
         inv.inventory(logged_id, user_data, inv_item_data, inv_monster_data, monster_data)
     elif game_choice == "LAB":
@@ -69,7 +69,7 @@ while logged_in:
     elif game_choice == "BATTLE":
         bat.battle(logged_id, user_data, inv_item_data, inv_monster_data, monster_data)
     elif game_choice == "ARENA":
-        arena.arena(logged_id,user_data,inv_item_data,inv_monster_data,monster_data)
+        arena.arena(logged_id, user_data, inv_item_data, inv_monster_data, monster_data)
     elif game_choice == "GACHA":
         user_data, inv_monster_data = gacha.gacha(logged_id, logged_coin, user_data, monster_data, inv_monster_data)
     elif game_choice == "SAVE":
