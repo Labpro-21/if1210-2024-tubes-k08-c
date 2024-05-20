@@ -56,7 +56,7 @@ def select_monster (id: int, user: list[dict],list_monster_user):
          |  |   |   |
           \\._\\   \\._\\ 
 
-RAWRRR, Agent {battle.name_user(id,user)} mengeluarkan monster {monster_n(pilihan-1)['type']} !!!
+RAWRRR, Agent {name_user(id,user)} mengeluarkan monster {monster_n(pilihan-1)['type']} !!!
 
 Name : {monster_n(pilihan-1)['type']}
 ATK Power : {list_player_monster[0]}
