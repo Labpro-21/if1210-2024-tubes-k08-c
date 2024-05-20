@@ -48,8 +48,7 @@ def add(monster_data: list[dict],
             monsterid = int(input("Enter Monster ID: "))
             initialstock = input("Enter initial stock: ")
             price = input("Enter price: ")
-            shop_monster_data[monsterid - 1]["stock"] = initialstock
-            shop_monster_data[monsterid - 1]["price"] = price
+            shop_monster_data.append({"monster_id": monsterid, "stock": initialstock, "price": price})
             print(f"{monster_data[monsterid - 1]['type']} has been added to shop!")
         else:
             print("All monsters in the database are available for purchase !!!")
