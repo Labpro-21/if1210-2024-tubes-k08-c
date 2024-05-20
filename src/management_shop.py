@@ -46,14 +46,17 @@ def add(monster_data: list[dict],
         for i in range(len(monster_data)):
             if not exist(display_monster_shop, monster_data[i]['id'], "id"):
                 unsold_mons.append(monster_data[i])
-                print("wtf")
         if unsold_mons:
             print(unsold_mons)
             tabulasi.tabel(unsold_mons, ['ID', 'Type', 'Atk Power', 'Def Power', 'HP'])
             monsterid = int(input("Enter Monster ID: "))
             initialstock = input("Enter initial stock: ")
             price = input("Enter price: ")
-            shop_monster_data.append({"monster_id": monsterid, "stock": initialstock, "price": price})
+            if exist(shop_monster_data,monsterid,"monster_id"):
+                shop_monster_data[index(shop_monster_data,monsterid,"monster_id")]['stock'] = initialstock
+                shop_monster_data[index(shop_monster_data, monsterid, "monster_id")]['price'] = price
+            else:
+                shop_monster_data.append({"monster_id": monsterid, "stock": initialstock, "price": price})
             print(f"{monster_data[monsterid - 1]['type']} has been added to shop!")
         else:
             print("All monsters in the database are available for purchase !!!")
@@ -149,8 +152,8 @@ def shop_management(
     print(">>> SHOP")
     print("Ah.. it's good to see you again. Welcome!")
     # assume the user's input is always valid
-    while True:
 
+    while True:
         # inisiasi list of dictionaries baru untuk di-display di monster shop
         display_monster = []
         display_index = 0
