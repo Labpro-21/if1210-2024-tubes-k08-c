@@ -1,3 +1,5 @@
+import copy
+
 import tabel as tabulasi
 
 
@@ -40,10 +42,13 @@ def add(monster_data: list[dict],
     choice = str(input("MONSTER / ITEM: "))
     if choice.lower() == "monster":
         unsold_mons = []
+        print(monster_data)
         for i in range(len(monster_data)):
             if not exist(display_monster_shop, monster_data[i]['id'], "id"):
                 unsold_mons.append(monster_data[i])
+                print("wtf")
         if unsold_mons:
+            print(unsold_mons)
             tabulasi.tabel(unsold_mons, ['ID', 'Type', 'Atk Power', 'Def Power', 'HP'])
             monsterid = int(input("Enter Monster ID: "))
             initialstock = input("Enter initial stock: ")
@@ -145,16 +150,18 @@ def shop_management(
     print("Ah.. it's good to see you again. Welcome!")
     # assume the user's input is always valid
     while True:
+
         # inisiasi list of dictionaries baru untuk di-display di monster shop
         display_monster = []
         display_index = 0
         for i in range(len(shop_monster_dat)):
             if exist(monster_dat, shop_monster_dat[i]['monster_id'], "id") and shop_monster_dat[i]['stock'] != 0:
-                display_monster.append(monster_dat[i])
+                display_monster.append(monster_dat[i].copy())
                 display_monster[display_index]["stock"] = shop_monster_dat[i]["stock"]
                 display_monster[display_index]["price"] = shop_monster_dat[i]["price"]
                 display_index += 1
                 # inisiasi list of dictionaries baru untuk didisplay di item shop
+
         display_item = []
         for i in range(len(shop_item_dat)):
             if shop_item_dat[i]['stock'] != 0:
