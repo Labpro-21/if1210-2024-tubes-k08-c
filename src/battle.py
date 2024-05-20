@@ -8,10 +8,10 @@ import time
 # Parameter monster_dict untuk file monster.csv
 # Parameter id merupakan id dari pemain
 
-item_inventory = [{'user_id': '2', 'type': 'strength', 'quantity': '5'}, {'user_id': '2', 'type': 'resilience', 'quantity': '3'}, {'user_id': '3', 'type': 'resilience', 'quantity': '7'}, {'user_id': '4', 'type': 'healing', 'quantity': '3'}, {'user_id': '5', 'type': 'strength', 'quantity': '20'}]
-monster_inventory = [{'user_id': '2', 'monster_id': '1', 'level': '1'}, {'user_id': '3', 'monster_id': '2', 'level': '2'}, {'user_id': '3', 'monster_id': '3', 'level': '1'}, {'user_id': '4', 'monster_id': '4', 'level': '1'}, {'user_id': '5', 'monster_id': '5', 'level': '5'}]
-monster_dict = [{'id': '1', 'type': 'Pikachow', 'atk_power': '125', 'def_power': '10', 'hp': '600'}, {'id': '2', 'type': 'Bulbu', 'atk_power': '50', 'def_power': '50', 'hp': '1200'}, {'id': '3', 'type': 'Zeze', 'atk_power': '300', 'def_power': '10', 'hp': '100'}, {'id': '4', 'type': 'Zuko', 'atk_power': '100', 'def_power': '25', 'hp': '800'}, {'id': '5', 'type': 'Chacha', 'atk_power': '80', 'def_power': '30', 'hp': '7006'}]
-user = [{'id': '1', 'username': 'Mr_Monogram', 'password': 'monogrammer77', 'role': 'admin', 'oc': '0'}, {'id': '2', 'username': 'Asep_Spakbor', 'password': 'asepwow123', 'role': 'agent', 'oc': '9999'}, {'id': '3', 'username': 'Agen_P', 'password': 'platypus123', 'role': 'agent', 'oc': '0'}, {'id': '4', 'username': 'B4ngk1dd0ssss', 'password': 'bangkitganteng', 'role': 'agent', 'oc': '1337'}, {'id': '5', 'username': 'Kenny_agen_rahasia', 'password': 'kribogeming55', 'role': 'agent', 'oc': '6699'}]
+# item_inventory = [{'user_id': '2', 'type': 'strength', 'quantity': '5'}, {'user_id': '2', 'type': 'resilience', 'quantity': '3'}, {'user_id': '3', 'type': 'resilience', 'quantity': '7'}, {'user_id': '4', 'type': 'healing', 'quantity': '3'}, {'user_id': '5', 'type': 'strength', 'quantity': '20'}]
+# monster_inventory = [{'user_id': '2', 'monster_id': '1', 'level': '1'}, {'user_id': '3', 'monster_id': '2', 'level': '2'}, {'user_id': '3', 'monster_id': '3', 'level': '1'}, {'user_id': '4', 'monster_id': '4', 'level': '1'}, {'user_id': '5', 'monster_id': '5', 'level': '5'}]
+# monster_dict = [{'id': '1', 'type': 'Pikachow', 'atk_power': '125', 'def_power': '10', 'hp': '600'}, {'id': '2', 'type': 'Bulbu', 'atk_power': '50', 'def_power': '50', 'hp': '1200'}, {'id': '3', 'type': 'Zeze', 'atk_power': '300', 'def_power': '10', 'hp': '100'}, {'id': '4', 'type': 'Zuko', 'atk_power': '100', 'def_power': '25', 'hp': '800'}, {'id': '5', 'type': 'Chacha', 'atk_power': '80', 'def_power': '30', 'hp': '7006'}]
+# user = [{'id': '1', 'username': 'Mr_Monogram', 'password': 'monogrammer77', 'role': 'admin', 'oc': '0'}, {'id': '2', 'username': 'Asep_Spakbor', 'password': 'asepwow123', 'role': 'agent', 'oc': '9999'}, {'id': '3', 'username': 'Agen_P', 'password': 'platypus123', 'role': 'agent', 'oc': '0'}, {'id': '4', 'username': 'B4ngk1dd0ssss', 'password': 'bangkitganteng', 'role': 'agent', 'oc': '1337'}, {'id': '5', 'username': 'Kenny_agen_rahasia', 'password': 'kribogeming55', 'role': 'agent', 'oc': '6699'}]
 
 def user_id_monster(monster_inventory : list[dict[int]], id: int) -> list[dict[int]]: # fungsi untuk mengambil monster bergantung pada user_id
     list_monster = []
@@ -26,12 +26,12 @@ def name_user(id: int, user: list[dict[int]]) -> str: # fungsi untuk menentukan 
         if i['id'] == id:
             return i['username']
 
-def select_monster (id: int, user: list[dict],list_monster_user):
-    def monster_n(n): # fungsi untuk listing monster sesuai dengan yang dimiliki player
+def select_monster (id: int, user: list[dict],list_monster_user, monster_dict : list[dict]):
+    def monster_n(n,monster_dict): # fungsi untuk listing monster sesuai dengan yang dimiliki player
         return monster_dict[int(list_monster_user[n]["monster_id"])-1]
     print("""============ MONSTER LIST ============""")
     for i in range(len(list_monster_user)):
-        print(f"{i+1}. {monster_n(i)['type']}")
+        print(f"{i+1}. {monster_n(i,monster_dict)['type']}")
 
     while True:
         pilihan = int(input("\nPilih monster untuk bertarung: "))
@@ -40,9 +40,9 @@ def select_monster (id: int, user: list[dict],list_monster_user):
         else:
             break
 
-    list_player_monster = monster.atribut(monster_n(pilihan-1),int(list_monster_user[pilihan-1]['level']))
-    max_hp_player = monster.level_hp(monster_n(pilihan-1),int(list_monster_user[pilihan-1]['level']))
-    base_hp_player = monster.level_hp(monster_n(pilihan-1),1)
+    list_player_monster = monster.atribut(monster_n(pilihan-1,monster_dict),int(list_monster_user[pilihan-1]['level']))
+    max_hp_player = monster.level_hp(monster_n(pilihan-1,monster_dict),int(list_monster_user[pilihan-1]['level']))
+    base_hp_player = monster.level_hp(monster_n(pilihan-1,monster_dict),1)
 
     print(f"""\n          /\\----/\\_   
          /         \\   /|
@@ -56,16 +56,16 @@ def select_monster (id: int, user: list[dict],list_monster_user):
          |  |   |   |
           \\._\\   \\._\\ 
 
-RAWRRR, Agent {name_user(id,user)} mengeluarkan monster {monster_n(pilihan-1)['type']} !!!
+RAWRRR, Agent {name_user(id,user)} mengeluarkan monster {monster_n(pilihan-1,monster_dict)['type']} !!!
 
-Name : {monster_n(pilihan-1)['type']}
+Name : {monster_n(pilihan-1,monster_dict)['type']}
 ATK Power : {list_player_monster[0]}
 DEF Power : {list_player_monster[1]}
 HP        : {list_player_monster[2]}
 Level     : {list_monster_user[pilihan-1]['level']}""")
     return pilihan,list_player_monster,max_hp_player,base_hp_player
 
-def battle(id: int, user: list[dict], item_inventory: list[dict], monster_inventory: list[dict], monster_dict: list[int,str,int,int,int], level: int, pilihan: int,list_player_monster: list[int],max_hp_player: int,base_hp_player: int) -> None: # fungsi utama
+def battle(id: int, user: list[dict[int,str,str,str,str]], item_inventory: list[dict[int,str,int]], monster_inventory: list[dict[int]], monster_dict: list[int,str,int,int,int], level: int, pilihan: int,list_player_monster: list[int],max_hp_player: int,base_hp_player: int) -> None: # fungsi utama
     # untuk battel aja yg masukan level hinnga base_hp_player masukin aja 0
     random_num = lcg.randint1(0,len(monster_dict)-1)
     type_monster = monster_dict[random_num]
@@ -101,7 +101,7 @@ HP        : {skill_monster_enemy[2]}
 Level     : {level_monster}
 """)
     if level == 0:
-        pilihan,list_player_monster,max_hp_player,base_hp_player = select_monster(id,user,list_monster_user)
+        pilihan,list_player_monster,max_hp_player,base_hp_player = select_monster(id,user,list_monster_user,monster_dict)
 
     hp_enemy = skill_monster_enemy[2]
     hp_user = list_player_monster[2]
