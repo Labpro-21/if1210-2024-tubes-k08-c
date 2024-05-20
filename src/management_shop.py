@@ -147,11 +147,13 @@ def shop_management(
     while True:
         # inisiasi list of dictionaries baru untuk di-display di monster shop
         display_monster = []
+        display_index = 0
         for i in range(len(shop_monster_dat)):
             if exist(monster_dat, shop_monster_dat[i]['monster_id'], "id") and shop_monster_dat[i]['stock'] != 0:
                 display_monster.append(monster_dat[i])
-                display_monster[i]["stock"] = shop_monster_dat[i]["stock"]
-                display_monster[i]["price"] = shop_monster_dat[i]["price"]
+                display_monster[display_index]["stock"] = shop_monster_dat[i]["stock"]
+                display_monster[display_index]["price"] = shop_monster_dat[i]["price"]
+                display_index += 1
                 # inisiasi list of dictionaries baru untuk didisplay di item shop
         display_item = []
         for i in range(len(shop_item_dat)):
