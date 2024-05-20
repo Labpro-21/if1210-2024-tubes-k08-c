@@ -42,7 +42,7 @@ def arena (user_id:int, user_data: list[dict], item_inventory: list[dict], monst
     Selamat datang di Arena!!
 """)
     list_monster_user = battle.user_id_monster(monster_inventory,user_id)
-    pilihan,list_player_monster,max_hp_player,base_hp_player = battle.select_monster(user_id,user_data,list_monster_user)
+    pilihan,list_player_monster,max_hp_player,base_hp_player = battle.select_monster(user_id,user_data,list_monster_user,monster)
 
     stage = 1
     damage_dealt = 0
