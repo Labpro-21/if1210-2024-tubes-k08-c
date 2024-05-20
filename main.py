@@ -69,7 +69,7 @@ while True:
         elif game_choice == "LAB":
             lab.laboratory(inv_monster_data, monster_data,user_data,logged_id)
         elif game_choice == "BATTLE":
-            bat.battle(logged_id, user_data, inv_item_data, inv_monster_data, monster_data)
+            bat.battle(logged_id, user_data, inv_item_data, inv_monster_data, monster_data, 0, 0, [], 0, 0)
         elif game_choice == "ARENA":
             arena.arena(logged_id, user_data, inv_item_data, inv_monster_data, monster_data)
         elif game_choice == "GACHA":

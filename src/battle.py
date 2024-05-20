@@ -65,7 +65,7 @@ HP        : {list_player_monster[2]}
 Level     : {list_monster_user[pilihan-1]['level']}""")
     return pilihan,list_player_monster,max_hp_player,base_hp_player
 
-def battle(id: int, user: list[dict[int,str,str,str,str]], item_inventory: list[dict[int,str,int]], monster_inventory: list[dict[int]], monster_dict: list[int,str,int,int,int], level: int, pilihan: int,list_player_monster: list[int],max_hp_player: int,base_hp_player: int) -> None: # fungsi utama
+def battle(id: int, user: list[dict], item_inventory: list[dict], monster_inventory: list[dict], monster_dict: list[int,str,int,int,int], level: int, pilihan: int,list_player_monster: list[int],max_hp_player: int,base_hp_player: int) -> None: # fungsi utama
     # untuk battel aja yg masukan level hinnga base_hp_player masukin aja 0
     random_num = lcg.randint1(0,len(monster_dict)-1)
     type_monster = monster_dict[random_num]
