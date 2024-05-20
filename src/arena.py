@@ -5,6 +5,7 @@ import lcg
 
 
 
+
 # REALISASI FUNGSI LAIN
 def ui_arena(result:str,oc_received:int, stage:int,damage_dealt:int,damage_received:int):
     def ui_stats(result:str,oc_received:int, stage:int,damage_dealt:int,damage_received:int):
